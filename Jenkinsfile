@@ -70,7 +70,7 @@ pipeline{
         }
         stage ('Docker and Nexus') {
          when {
-                branch 'master'
+                branch 'cmd-master-patch-95526'
             }
             steps{
                  gitlabCommitStatus(name: 'Docker and Nexus') {
@@ -84,7 +84,7 @@ pipeline{
         }
         stage ('Deploy') {
           when {
-                branch 'master'
+                branch 'cmd-master-patch-95526'
             }
             steps{
                   gitlabCommitStatus(name: 'Deploy') {
