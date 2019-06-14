@@ -17,7 +17,7 @@ class Server{
     }
 
     routes(){
-        this.app.use('/api_admision',routerEnd);
+        this.app.use('/',routerEnd);
     }
 
     start(){
