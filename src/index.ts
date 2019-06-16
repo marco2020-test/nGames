@@ -2,10 +2,10 @@ import express from 'express'
 import morgan from 'morgan'
 import routerEnd from './routes/route'
 
-class Server {
-    public app = express.application;
-    constructor() {
-        this.app = express();
+class Server{
+    public app=express.application;
+    constructor(){
+        this.app=express();
         this.config();
         this.routes();
     }

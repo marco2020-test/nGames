@@ -4,7 +4,7 @@ import Cliente from '../models/clientModel'
 var pg = require("pg")
 var connectionString = "pg://admision:admision@stelios.trebolit.local:5432/admision";
 var client = new pg.Client(connectionString);
-
+ 
 client.connect((err: Error) => {
     if (err) {
         console.error('connection error', err.stack)
@@ -23,6 +23,7 @@ export function getList(req: Request, resp: Response) {
             console.log(formatoN);
             for (var i = 0; i < formatoN['rows'].length; i++) {
                 console.log("Aqui esta " + formatoN['rows'][i].DESCRIPTION);
+                console.log("El valor es " + formatoN['rows'][i].DESCRIPTION);
             }
             resp.json({ formatoN });
         }
@@ -37,6 +38,8 @@ export function getClient(req: Request, res: Response) {
 
     /*Request.post({
         "headers": { "content-type": "application/json", "Access-Control-Allow-Headers": "*" },
+    Request.post({
+        "headers": { "content-type": "application/json" },
         "url": "http://localhost:3000/mock/searchClient",
         "body": JSON.stringify({
             "rut": req.body.documento
@@ -77,7 +80,6 @@ export function getClient(req: Request, res: Response) {
         }
         res.json({ data: error });
     }
-
 }
 
 export function getQuotes(req: Request, res: Response) {

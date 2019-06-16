@@ -4,6 +4,7 @@ const cors = require('cors');
 var corsOptions = {
     origin: '*'
   }
+
 class Route {
     public rout: Router;
     constructor() {
