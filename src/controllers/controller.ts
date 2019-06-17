@@ -35,7 +35,7 @@ export function getClient(req: Request, res: Response) {
     const newPost = new Cliente({ documento });
     console.log(req.body.documento);
     var Request = require("request");
-
+    var respuesta;
     /*Request.post({
         "headers": { "content-type": "application/json", "Access-Control-Allow-Headers": "*" },
     Request.post({
@@ -52,13 +52,13 @@ export function getClient(req: Request, res: Response) {
     });*/
 
     if (req.body.documento == '13.871.792-5') {
-        var respuesta = {
+        respuesta = {
             "PPN": "432296",
             "nombres": "LORENA DEL PILAR",
             "apellidoMaterno": "LEON",
             "apellidoPaterno": "CUBILLOS",
             "tipoIdentificacion": "1",
-            "numeroIdentificacion": "13021708",
+            "numeroIdentificacion": "13.871.792-5",
             "nombreTipoIdentificacion": "RUT",
             "nombreSexo": "Masculino",
             "fechaNacimientoTexto": "11-08-1963",
@@ -70,16 +70,45 @@ export function getClient(req: Request, res: Response) {
             "nombreCiudad": "Santiago",
             "nombrePais": "Chile",
             "nombrePrevision": "Banmédica S.A.",
-            "nombreNivelFonasa": "Nivel A", // validar si es isapre
+            "nombreNivelFonasa": "Nivel A",
+            "srvMessage": 0
+        }
+
+        res.json({ respuesta });
+    } else 
+
+    if (req.body.documento == '20.871.792-5') {
+        respuesta = {
+            "PPN": "445566",
+            "nombres": "SERGIO ANTONIO",
+            "apellidoMaterno": "GONZALES",
+            "apellidoPaterno": "CEBALLOS",
+            "tipoIdentificacion": "1",
+            "numeroIdentificacion": "20.871.792-5",
+            "nombreTipoIdentificacion": "RUT",
+            "nombreSexo": "Masculino",
+            "fechaNacimientoTexto": "11-08-1963",
+            "correo": "sergioantonio@gmail.com",
+            "telefono1": "+56 912345678",
+            "telefono2": "+56 987654321",
+            "direccion": "Monjitas 859",
+            "nombreComuna": "Santiago",
+            "nombreCiudad": "Santiago",
+            "nombrePais": "Chile",
+            "nombrePrevision": "Banmédica S.A.",
+            "nombreNivelFonasa": "Nivel A",
+            "srvMessage": 0
         }
 
         res.json({ respuesta });
     } else {
-        var error = {
-            "srvMessage": "0380000 No se encontro paciente"
-        }
-        res.json({ data: error });
+        respuesta = 
+                {
+                    "srvMessage": 1
+                };
+        res.json({ respuesta });
     }
+
 }
 
 export function getQuotes(req: Request, res: Response) {
@@ -127,14 +156,14 @@ export function getQuotes(req: Request, res: Response) {
                     "observaciones": "Internet!! - Rut Solicitante: 22754134-2",
                     "ppnpaciente": "5305668",
                     "rutmedico": "14113120",
-                    "rutpaciente": "22179817- 1",
+                    "rutpaciente": "13.871.792-5",
                     "servicio": "MEDICINA INTERNA",
                     "sobrecupo": "N",
                     "sucursal": "Vitacura",
                     "tipoatencion": "CONSULTA",
                     "validodesde": "0102201",
-                    "valorparticular": "60000"
-
+                    "valorparticular": "60000",
+                    "srvMessage": 0
                 },
                 {
                     "cc": "7714",
@@ -155,7 +184,7 @@ export function getQuotes(req: Request, res: Response) {
                     "observaciones": "Internet!! - Rut Solicitante: 16010816-9",
                     "ppnpaciente": "5305668",
                     "rutmedico": "8934665",
-                    "rutpaciente": "22179817-",
+                    "rutpaciente": "13.871.792-5",
                     "servicio": "OFTALMOLOGIA",
                     "sobrecupo": "N",
                     "sucursal": "Vitacura",
@@ -183,7 +212,7 @@ export function getQuotes(req: Request, res: Response) {
                     "observaciones": "Internet!! - Rut Solicitante: 16010816-9",
                     "ppnpaciente": "5305668",
                     "rutmedico": "14166704",
-                    "rutpaciente": "22179817- 1",
+                    "rutpaciente": "13.871.792-5",
                     "servicio": "MEDICINA INTERNA",
                     "sobrecupo": "N",
                     "sucursal": "Vitacura",
@@ -198,8 +227,12 @@ export function getQuotes(req: Request, res: Response) {
         res.json({ data: respuesta });
     } else {
         var error = {
-            "srvMessage": "0380000 No se encontro reserva"
-        }
+            "data": [
+                {
+                    "srvMessage": 1
+                },
+            ]
+        };
         res.json({ data: error });
     }
 }
