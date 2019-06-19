@@ -1,11 +1,16 @@
 import { Request, Response, Router, response } from 'express'
 import * as control from '../controllers/controller';
+const cors = require('cors');
+var corsOptions = {
+    origin: '*'
+  }
 
 class Route {
     public rout: Router;
     constructor() {
         this.rout = Router();
         this.routes();
+        
     }
 
     routes() {
