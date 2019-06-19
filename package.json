@@ -1,7 +1,7 @@
 {
   "name": "api-admin",
   "version": "1.0.0",
-  "description": "",
+  "description": "api admision",
   "main": "index.js",
   "scripts": {
     "ts": "tsc -w",
