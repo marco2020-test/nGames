@@ -22,13 +22,7 @@ exports.searchQuotes = async function (req: any, res: any): Promise<any> {
             try {
                 const rawResponse = JSON.parse(xml2json(result[1], { compact: true, spaces: 4 }))
                 const response = rawResponse["S:Envelope"]["S:Body"]["prcReservasXPacienteResponse"]["prcReservasXPacienteResult"]
-                var fechaAtencion;
-                var horaAtencion;
-                var rutpaciente;
-                var nombremedico;
-                var servicio;
-                var sucursal;
-                var tipoatencion;
+               
                 if (response["voutCursors"]) {
                     if (response["voutCursors"][0]) {
                         console.log('Cant::' + response["voutCursors"].length);
@@ -36,11 +30,7 @@ exports.searchQuotes = async function (req: any, res: any): Promise<any> {
                         var data = [];
                         var data1;
                         for (var i = 0; i < response["voutCursors"].length; i++) {
-                            if(response['voutCursors'][i]['fechaAtencion1']){
-                                console.log('Si esta');
-                            }else{
-                                console.log('No esta');
-                            }
+                           
                             data1 = {
                                 "fechaAtencion": response['voutCursors'][i]['fechaAtencion']["_text"],
                                 "horaAtencion": response['voutCursors'][i]['horaAtencion']["_text"],

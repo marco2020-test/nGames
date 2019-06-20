@@ -32,7 +32,7 @@ export async function searchClient(req: any, res: any) {
                 "correo": "juanfranciscorodriguez@gmail.com",
                 "telefono1": "+56 912345678",
                 "telefono2": "+56 987654321",
-                "direccion": "Av. presidente eduardo frei 12090",
+                "direccion": "Av. presidente 12090",
                 "nombreComuna": "Montalva",
                 "nombreCiudad": "Santiago",
                 "nombrePais": "Chile",
