@@ -22,40 +22,33 @@ exports.searchQuotes = async function (req: any, res: any): Promise<any> {
             try {
                 const rawResponse = JSON.parse(xml2json(result[1], { compact: true, spaces: 4 }))
                 const response = rawResponse["S:Envelope"]["S:Body"]["prcReservasXPacienteResponse"]["prcReservasXPacienteResult"]
-
+                var fechaAtencion;
+                var horaAtencion;
+                var rutpaciente;
+                var nombremedico;
+                var servicio;
+                var sucursal;
+                var tipoatencion;
                 if (response["voutCursors"]) {
                     if (response["voutCursors"][0]) {
-                        //console.log('Cant::' + response["voutCursors"].length);
-                        //console.log('Prueba: ' + response["voutCursors"][0]['consultainstitucional']['_text']);
+                        console.log('Cant::' + response["voutCursors"].length);
+                        console.log('Prueba: ' + response["voutCursors"][0]['fechaAtencion']['_text']);
                         var data = [];
                         var data1;
                         for (var i = 0; i < response["voutCursors"].length; i++) {
+                            if(response['voutCursors'][i]['fechaAtencion1']){
+                                console.log('Si esta');
+                            }else{
+                                console.log('No esta');
+                            }
                             data1 = {
-                                "cc": response['voutCursors'][i]['cc']["_text"],
-                                "consultainstitucional": response['voutCursors'][i]['consultainstitucional']["_text"],
-                                "consultaprivada": response['voutCursors'][i]['consultaprivada']["_text"],
-                                "consultasincosto": response['voutCursors'][i]['consultasincosto']["_text"],
-                                "correlativo": response['voutCursors'][i]['correlativo']["_text"],
                                 "fechaAtencion": response['voutCursors'][i]['fechaAtencion']["_text"],
                                 "horaAtencion": response['voutCursors'][i]['horaAtencion']["_text"],
-                                "idagenda": response['voutCursors'][i]['idagenda']["_text"],
-                                "idreserva": response['voutCursors'][i]['idreserva']["_text"],
-                                "idservicio": response['voutCursors'][i]['idservicio']["_text"],
-                                "idsucursal": response['voutCursors'][i]['idsucursal']["_text"],
-                                "idtipoatencion": response['voutCursors'][i]['idtipoatencion']["_text"],
-                                "isapre": response['voutCursors'][i]['isapre']["_text"],
-                                "mp": response['voutCursors'][i]['mp']["_text"],
-                                "nombremedico": response['voutCursors'][i]['nombremedico']["_text"],
-                                "observaciones": response['voutCursors'][i]['observaciones']["_text"],
-                                "ppnpaciente": response['voutCursors'][i]['ppnpaciente']["_text"],
-                                "rutmedico": response['voutCursors'][i]['rutmedico']["_text"],
                                 "rutpaciente": response['voutCursors'][i]['rutpaciente']["_text"],
+                                "nombremedico": response['voutCursors'][i]['nombremedico']["_text"],
                                 "servicio": response['voutCursors'][i]['servicio']["_text"],
-                                "sobrecupo": response['voutCursors'][i]['sobrecupo']["_text"],
                                 "sucursal": response['voutCursors'][i]['sucursal']["_text"],
                                 "tipoatencion": response['voutCursors'][i]['tipoatencion']["_text"],
-                                "validodesde": response['voutCursors'][i]['validodesde']["_text"],
-                                "valorparticular": response['voutCursors'][i]['valorparticular']["_text"],
                                 "srvMessage": 0
                             };
                             data[i] = data1;
@@ -65,46 +58,34 @@ exports.searchQuotes = async function (req: any, res: any): Promise<any> {
                     } else {
                         //console.log('Solo una pocision');
                         var data2;
+                        var data3 = [];
+                        if(response['voutCursors']['fechaAtencion1']){
+                            console.log('Si esta');
+                        }else{
+                            console.log('No esta');
+                        }
                         data2 = {
-                            "cc": response['voutCursors']['cc']["_text"],
-                            "consultainstitucional": response['voutCursors']['consultainstitucional']["_text"],
-                            "consultaprivada": response['voutCursors']['consultaprivada']["_text"],
-                            "consultasincosto": response['voutCursors']['consultasincosto']["_text"],
-                            "correlativo": response['voutCursors']['correlativo']["_text"],
                             "fechaAtencion": response['voutCursors']['fechaAtencion']["_text"],
                             "horaAtencion": response['voutCursors']['horaAtencion']["_text"],
-                            "idagenda": response['voutCursors']['idagenda']["_text"],
-                            "idreserva": response['voutCursors']['idreserva']["_text"],
-                            "idservicio": response['voutCursors']['idservicio']["_text"],
-                            "idsucursal": response['voutCursors']['idsucursal']["_text"],
-                            "idtipoatencion": response['voutCursors']['idtipoatencion']["_text"],
-                            "isapre": response['voutCursors']['isapre']["_text"],
-                            "mp": response['voutCursors']['mp']["_text"],
-                            "nombremedico": response['voutCursors']['nombremedico']["_text"],
-                            "observaciones": response['voutCursors']['observaciones']["_text"],
-                            "ppnpaciente": response['voutCursors']['ppnpaciente']["_text"],
-                            "rutmedico": response['voutCursors']['rutmedico']["_text"],
                             "rutpaciente": response['voutCursors']['rutpaciente']["_text"],
+                            "nombremedico": response['voutCursors']['nombremedico']["_text"],
                             "servicio": response['voutCursors']['servicio']["_text"],
-                            "sobrecupo": response['voutCursors']['sobrecupo']["_text"],
                             "sucursal": response['voutCursors']['sucursal']["_text"],
                             "tipoatencion": response['voutCursors']['tipoatencion']["_text"],
-                            "validodesde": response['voutCursors']['validodesde']["_text"],
-                            "valorparticular": response['voutCursors']['valorparticular']["_text"],
                             "srvMessage": 0
                         };
                         //console.log('salida:' + data2);
-                        return res.status(200).send({ data: data2 })
+                        data3[0] = data2;
+                        return res.status(200).send({ data: data3 })
                     }
                 } else {
-                    var error = {
-                        "data": [
-                            {
-                                "srvMessage": 1
-                            },
-                        ]
+                    var rep = [];
+                    var erro;
+                    erro = {
+                        "srvMessage": 2
                     };
-                    return res.status(200).send({ data: error })
+                    rep[0] = erro;
+                    return res.status(200).send({ data: rep })
                 }
 
             }

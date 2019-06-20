@@ -18,16 +18,39 @@ export async function searchClient(req: any, res: any) {
             res.json( JSON.parse(body));
         });*/
 
-        if (req.body.documento == '13.871.792-5') {
+        if (req.body.documento == '13871792-5') {
             var respuesta = {
                 "PPN": "432296",
-                "nombres": "LORENA DEL PILAR",
-                "apellidoMaterno": "LEON",
-                "apellidoPaterno": "CUBILLOS",
+                "nombres": "JUAN FRANCISCO",
+                "apellidoMaterno": "RODRIGUEZ",
+                "apellidoPaterno": "ARIAS",
                 "tipoIdentificacion": "1",
                 "numeroIdentificacion": "13.871.792-5",
                 "nombreTipoIdentificacion": "RUT",
                 "nombreSexo": "Masculino",
+                "fechaNacimientoTexto": "11-08-1963",
+                "correo": "juanfranciscorodriguez@gmail.com",
+                "telefono1": "+56 912345678",
+                "telefono2": "+56 987654321",
+                "direccion": "Av. presidente eduardo frei 12090",
+                "nombreComuna": "Montalva",
+                "nombreCiudad": "Santiago",
+                "nombrePais": "Chile",
+                "nombrePrevision": "Banmédica S.A.",
+                "nombreNivelFonasa": "Nivel A",
+                "srvMessage": 0
+            }
+            res.send({ respuesta });
+        } else if (req.body.documento == '26161914-8') {
+            var respuesta = {
+                "PPN": "26161914",
+                "nombres": "LORENA DEL PILAR",
+                "apellidoMaterno": "LEON",
+                "apellidoPaterno": "CUBILLOS",
+                "tipoIdentificacion": "1",
+                "numeroIdentificacion": "26161914-8",
+                "nombreTipoIdentificacion": "RUT",
+                "nombreSexo": "FEMENINO",
                 "fechaNacimientoTexto": "11-08-1963",
                 "correo": "lorenaleon@gmail.com",
                 "telefono1": "+56 912345678",
@@ -41,22 +64,22 @@ export async function searchClient(req: any, res: any) {
                 "srvMessage": 0
             }
             res.send({ respuesta });
-        } else if (req.body.documento == '20.871.792-5') {
+        }else if (req.body.documento == '10465210-7') {
             var respuesta = {
-                "PPN": "432296",
-                "nombres": "LORENA DEL PILAR",
-                "apellidoMaterno": "LEON",
-                "apellidoPaterno": "CUBILLOS",
+                "PPN": "10465210",
+                "nombres": "ALBERTO SANTIAGO",
+                "apellidoMaterno": "ROSAS",
+                "apellidoPaterno": "GONZALEZ",
                 "tipoIdentificacion": "1",
-                "numeroIdentificacion": "13.871.792-5",
+                "numeroIdentificacion": "10465210-7",
                 "nombreTipoIdentificacion": "RUT",
                 "nombreSexo": "Masculino",
                 "fechaNacimientoTexto": "11-08-1963",
                 "correo": "lorenaleon@gmail.com",
                 "telefono1": "+56 912345678",
                 "telefono2": "+56 987654321",
-                "direccion": "los alerces 859",
-                "nombreComuna": "Macul",
+                "direccion": "Monjitas 859",
+                "nombreComuna": "Centro",
                 "nombreCiudad": "Santiago",
                 "nombrePais": "Chile",
                 "nombrePrevision": "Banmédica S.A.",
@@ -64,12 +87,11 @@ export async function searchClient(req: any, res: any) {
                 "srvMessage": 0
             }
             res.send({ respuesta });
-        }
-        else {
+        }else {
             var error = {
                 "data": [
                     {
-                        "srvMessage": 1
+                        "srvMessage": 2
                     },
                 ]
             };
