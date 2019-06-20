@@ -1,30 +1,10 @@
-import express from 'express'
-import morgan from 'morgan'
-import routerEnd from './routes/route'
+'use strict'
 
-class Server{
-    public app=express.application;
-    constructor(){
-        this.app=express();
-        this.config();
-        this.routes();
-    }
+import server from './server';
 
-    config(){
-        this.app.set('port',process.env.PORT || 3001);
-        this.app.use(express.json());
-        this.app.use(morgan('dev'));
-    }
+const port = process.env.PORT || 3001;
 
-    routes(){
-        this.app.use('/',routerEnd);
-    }
-
-    start(){
-        this.app.listen(this.app.get('port'), ()=>{
-            console.log('Escuchando el puerto ', this.app.get('port'))});
-    }
-}
-
-const server=new Server();
-server.start();
+server.listen(port, () => {
+    console.log('El servidor está inicializado en el puerto: ' + port);
+});
+ 
