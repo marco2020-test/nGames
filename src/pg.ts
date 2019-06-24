@@ -1,4 +1,4 @@
-import * as pg from 'pg';
+var pg = require('pg');
 
 const connectionData = {
     user: 'admision',
