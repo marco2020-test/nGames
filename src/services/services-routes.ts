@@ -7,7 +7,7 @@ var servicesControlsoap = require('../soap/soap-controller');
 
 var api = express.Router();
 api.post('/searchClient', servicesController.searchClient);
-api.post('/searchQuotes1', servicesController.searchQuotes);
-api.post('/searchQuotes', servicesControlsoap.searchQuotes);
+api.post('/searchQuotes', servicesController.searchQuotes); //Reservas dumming
+api.post('/searchQuotes1', servicesControlsoap.searchQuotes); //Reservas SOAP Alemana
 
 module.exports = api;
