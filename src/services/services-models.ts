@@ -41,14 +41,14 @@ export async function searchClient(req: any, res: any) {
                 "srvMessage": 0
             }
             res.send({ respuesta });
-        } else if (req.body.documento == '26161914-8') {
+        } else if (req.body.documento == '6383170-0') {
             var respuesta = {
-                "PPN": "26161914",
+                "PPN": "6383170",
                 "nombres": "LORENA DEL PILAR",
                 "apellidoMaterno": "LEON",
                 "apellidoPaterno": "CUBILLOS",
                 "tipoIdentificacion": "1",
-                "numeroIdentificacion": "26161914-8",
+                "numeroIdentificacion": "6383170-0",
                 "nombreTipoIdentificacion": "RUT",
                 "nombreSexo": "FEMENINO",
                 "fechaNacimientoTexto": "11-08-1963",
@@ -64,14 +64,14 @@ export async function searchClient(req: any, res: any) {
                 "srvMessage": 0
             }
             res.send({ respuesta });
-        }else if (req.body.documento == '10465210-7') {
+        } else if (req.body.documento == '15796677-4') {
             var respuesta = {
-                "PPN": "10465210",
+                "PPN": "15796677",
                 "nombres": "ALBERTO SANTIAGO",
                 "apellidoMaterno": "ROSAS",
                 "apellidoPaterno": "GONZALEZ",
                 "tipoIdentificacion": "1",
-                "numeroIdentificacion": "10465210-7",
+                "numeroIdentificacion": "15796677-4",
                 "nombreTipoIdentificacion": "RUT",
                 "nombreSexo": "Masculino",
                 "fechaNacimientoTexto": "11-08-1963",
@@ -87,7 +87,7 @@ export async function searchClient(req: any, res: any) {
                 "srvMessage": 0
             }
             res.send({ respuesta });
-        }else {
+        } else {
             var error = {
                 "data": [
                     {
@@ -106,7 +106,7 @@ export async function searchClient(req: any, res: any) {
 
 export async function searchQuotes(req: any, res: any) {
     try {
-        console.log('en el nuevo metodo');
+        console.log('Metodo viejo: ' + req.body.inRut);
         /*Request.post({
             "headers": { "content-type": "application/json" },
             "url": "http://localhost:3000/mock/searchQuotes",
@@ -124,106 +124,105 @@ export async function searchQuotes(req: any, res: any) {
             res.json( JSON.parse(body));
         });*/
 
-        if (req.body.documento == '432296') {
-            var respuesta = {
-                "data": [
-                    {
-                        "cc": "5305668",
-                        "consultainstitucional": "101002",
-                        "consultaprivada": "101051",
-                        "consultasincosto": "101044",
-                        "correlativo": "1",
-                        "fecha_atencion": "0406201",
-                        "hora_atencion": "14:00",
-                        "idagenda": "1622216",
-                        "idreserva": "27251534",
-                        "idservicio": "2",
-                        "idsucursal": "1",
-                        "idtipoatencion": "C",
-                        "isapre": "1",
-                        "mp": "0",
-                        "nombremedico": "GOMEZ NUÑEZ MARCELA ANDREA",
-                        "observaciones": "Internet!! - Rut Solicitante: 22754134-2",
-                        "ppnpaciente": "5305668",
-                        "rutmedico": "14113120",
-                        "rutpaciente": "13.871.792-5",
-                        "servicio": "MEDICINA INTERNA",
-                        "sobrecupo": "N",
-                        "sucursal": "Vitacura",
-                        "tipoatencion": "CONSULTA",
-                        "validodesde": "0102201",
-                        "valorparticular": "60000",
-                        "srvMessage": 0
-                    },
-                    {
-                        "cc": "7714",
-                        "consultainstitucional": "101002",
-                        "consultaprivada": "101051",
-                        "consultasincosto": "101044",
-                        "correlativo": "1",
-                        "fecha_atencion": "05062019",
-                        "hora_atencion": "12:00",
-                        "idagenda": "1411",
-                        "idreserva": "27251540",
-                        "idservicio": "4",
-                        "idsucursal": "1",
-                        "idtipoatencion": "C",
-                        "isapre": "1",
-                        "mp": "0",
-                        "nombremedico": "BLANCO MORENO GRACIELA",
-                        "observaciones": "Internet!! - Rut Solicitante: 16010816-9",
-                        "ppnpaciente": "5305668",
-                        "rutmedico": "8934665",
-                        "rutpaciente": "13.871.792-5",
-                        "servicio": "OFTALMOLOGIA",
-                        "sobrecupo": "N",
-                        "sucursal": "Vitacura",
-                        "tipoatencion": "CONSULTA",
-                        "validodesde": "01022017",
-                        "valorparticular": "60000"
-
-                    },
-                    {
-                        "cc": "7718",
-                        "consultainstitucional": "101002",
-                        "consultaprivada": "101051",
-                        "consultasincosto": "101044",
-                        "correlativo": "1",
-                        "fecha_atencion": "0506201",
-                        "hora_atencion": "17:00",
-                        "idagenda": "1968129",
-                        "idreserva": "27251535",
-                        "idservicio": "2",
-                        "idsucursal": "1",
-                        "idtipoatencion": "C",
-                        "isapre": "1",
-                        "mp": "0",
-                        "nombremedico": "VALLEJO VERGARA PATRICIO EUGENIO",
-                        "observaciones": "Internet!! - Rut Solicitante: 16010816-9",
-                        "ppnpaciente": "5305668",
-                        "rutmedico": "14166704",
-                        "rutpaciente": "13.871.792-5",
-                        "servicio": "MEDICINA INTERNA",
-                        "sobrecupo": "N",
-                        "sucursal": "Vitacura",
-                        "tipoatencion": "CONSULTA",
-                        "validodesde": "01062017",
-                        "valorparticular": "0"
-
-                    },
-                ]
+        if (req.body.inRut == '432296') {
+            var respuesta = [];
+            var data;
+            data = {
+                "cc": "5305668",
+                "consultainstitucional": "101002",
+                "consultaprivada": "101051",
+                "consultasincosto": "101044",
+                "correlativo": "1",
+                "fechaAtencion": "0406201",
+                "horaAtencion": "14:00",
+                "idagenda": "1622216",
+                "idreserva": "27251534",
+                "idservicio": "2",
+                "idsucursal": "1",
+                "idtipoatencion": "C",
+                "isapre": "1",
+                "mp": "0",
+                "nombremedico": "GOMEZ NUÑEZ MARCELA ANDREA",
+                "observaciones": "Internet!! - Rut Solicitante: 22754134-2",
+                "ppnpaciente": "5305668",
+                "rutmedico": "14113120",
+                "rutpaciente": "13.871.792-5",
+                "servicio": "MEDICINA INTERNA",
+                "sobrecupo": "N",
+                "sucursal": "Vitacura",
+                "tipoatencion": "CONSULTA",
+                "validodesde": "0102201",
+                "valorparticular": "60000",
+                "srvMessage": 0
             };
+            respuesta[0] = data;
+            data = {
+                "cc": "7714",
+                "consultainstitucional": "101002",
+                "consultaprivada": "101051",
+                "consultasincosto": "101044",
+                "correlativo": "1",
+                "fechaAtencion": "05062019",
+                "horaAtencion": "12:00",
+                "idagenda": "1411",
+                "idreserva": "27251540",
+                "idservicio": "4",
+                "idsucursal": "1",
+                "idtipoatencion": "C",
+                "isapre": "1",
+                "mp": "0",
+                "nombremedico": "BLANCO MORENO GRACIELA",
+                "observaciones": "Internet!! - Rut Solicitante: 16010816-9",
+                "ppnpaciente": "5305668",
+                "rutmedico": "8934665",
+                "rutpaciente": "13.871.792-5",
+                "servicio": "OFTALMOLOGIA",
+                "sobrecupo": "N",
+                "sucursal": "Vitacura",
+                "tipoatencion": "CONSULTA",
+                "validodesde": "01022017",
+                "valorparticular": "60000"
 
+            };
+            respuesta[1] = data;
+            data = {
+                "cc": "7718",
+                "consultainstitucional": "101002",
+                "consultaprivada": "101051",
+                "consultasincosto": "101044",
+                "correlativo": "1",
+                "fechaAtencion": "0506201",
+                "horaAtencion": "17:00",
+                "idagenda": "1968129",
+                "idreserva": "27251535",
+                "idservicio": "2",
+                "idsucursal": "1",
+                "idtipoatencion": "C",
+                "isapre": "1",
+                "mp": "0",
+                "nombremedico": "VALLEJO VERGARA PATRICIO EUGENIO",
+                "observaciones": "Internet!! - Rut Solicitante: 16010816-9",
+                "ppnpaciente": "5305668",
+                "rutmedico": "14166704",
+                "rutpaciente": "13.871.792-5",
+                "servicio": "MEDICINA INTERNA",
+                "sobrecupo": "N",
+                "sucursal": "Vitacura",
+                "tipoatencion": "CONSULTA",
+                "validodesde": "01062017",
+                "valorparticular": "0"
+
+            };
+            respuesta[2] = data;
             res.send({ data: respuesta });
         } else {
-            var error = {
-                "data": [
-                    {
-                        "srvMessage": 1
-                    },
-                ]
+            var rep = [];
+            var erro;
+            erro = {
+                "srvMessage": 2
             };
-            res.send({ data: error });
+            rep[0] = erro;
+            return ({ data: rep })
         }
     }
     catch (err) {

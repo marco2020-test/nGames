@@ -1,4 +1,3 @@
-var db_client = require('../pg');
 import { recuperarListas, ListasModel } from './listas-models'
 
 exports.searchList = async (req: any, res: any) => {
