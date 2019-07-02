@@ -1,99 +1,24 @@
+import { xml2json } from 'xml-js'
+var Request = require('request');
+
+let infoClient = {};
+
 export async function searchClient(req: any, res: any) {
     try {
-        console.log('en el nuevo metodo');
-        /*Request.post({
+        console.log('Metodo viejo: ' + req.body.documento);
+        Request.post({
             "headers": { "content-type": "application/json" },
-            "url": "http://localhost:3000/mock/searchQuotes",
+            "url": process.env.PATH_CLIENTE,
             "body": JSON.stringify({
-                "In_Rut": req.body.documento,
-                "In_TipoIdentificacion": 2,
-                "In_Holding": "1",
-                "In_Pasaporte": "",
-                "In_Ppn": "5305668"
+                "documento": req.body.documento
             })
         }, (error: Error, response: Response, body: string) => {
             if (error) {
                 return console.dir(error);
             }
-            res.json( JSON.parse(body));
-        });*/
-        var respuesta;
-        if (req.body.documento == '13871792-5') {
-            respuesta = {
-                "PPN": "432296",
-                "nombres": "JUAN FRANCISCO",
-                "apellidoMaterno": "RODRIGUEZ",
-                "apellidoPaterno": "ARIAS",
-                "tipoIdentificacion": "1",
-                "numeroIdentificacion": "13.871.792-5",
-                "nombreTipoIdentificacion": "RUT",
-                "nombreSexo": "Masculino",
-                "fechaNacimientoTexto": "11-08-1963",
-                "correo": "juanfranciscorodriguez@gmail.com",
-                "telefono1": "+56 912345678",
-                "telefono2": "+56 987654321",
-                "direccion": "Av. presidente 12090",
-                "nombreComuna": "Montalva",
-                "nombreCiudad": "Santiago",
-                "nombrePais": "Chile",
-                "prevision": "I",
-                "nombrePrevision": "Banmédica S.A.",
-                "nombreNivelFonasa": "Nivel A",
-                "srvMessage": 0
-            }
-            res.send({ respuesta });
-        } else if (req.body.documento == '6383170-0') {
-            respuesta = {
-                "PPN": "6383170",
-                "nombres": "LORENA DEL PILAR",
-                "apellidoMaterno": "LEON",
-                "apellidoPaterno": "CUBILLOS",
-                "tipoIdentificacion": "1",
-                "numeroIdentificacion": "6383170-0",
-                "nombreTipoIdentificacion": "RUT",
-                "nombreSexo": "FEMENINO",
-                "fechaNacimientoTexto": "11-08-1963",
-                "correo": "lorenaleon@gmail.com",
-                "telefono1": "+56 912345678",
-                "telefono2": "+56 987654321",
-                "direccion": "los alerces 859",
-                "nombreComuna": "Macul",
-                "nombreCiudad": "Santiago",
-                "nombrePais": "Chile",
-                "prevision": "F",
-                "nombrePrevision": "Banmédica S.A.",
-                "nombreNivelFonasa": "Nivel A",
-                "srvMessage": 0
-            }
-            res.send({ respuesta });
-        } else if (req.body.documento == '15796677-4') {
-            respuesta = {
-                "PPN": "15796677",
-                "nombres": "ALBERTO SANTIAGO",
-                "apellidoMaterno": "ROSAS",
-                "apellidoPaterno": "GONZALEZ",
-                "tipoIdentificacion": "1",
-                "numeroIdentificacion": "15796677-4",
-                "nombreTipoIdentificacion": "RUT",
-                "nombreSexo": "Masculino",
-                "fechaNacimientoTexto": "11-08-1963",
-                "correo": "lorenaleon@gmail.com",
-                "telefono1": "+56 912345678",
-                "telefono2": "+56 987654321",
-                "direccion": "Monjitas 859",
-                "nombreComuna": "Centro",
-                "nombreCiudad": "Santiago",
-                "nombrePais": "Chile",
-                "prevision": "I",
-                "nombrePrevision": "Banmédica S.A.",
-                "nombreNivelFonasa": "Nivel A",
-                "srvMessage": 0
-            }
-            res.send({ respuesta });
-        } else {
-            var error = {'data':[{"srvMessage": 2}]};
-            res.send({ respuesta: error });
-        }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
@@ -104,116 +29,141 @@ export async function searchClient(req: any, res: any) {
 export async function searchQuotes(req: any, res: any) {
     try {
         console.log('Metodo viejo: ' + req.body.inRut);
-        /*Request.post({
+        console.log("url:" + process.env.PATH_RESERVAS + req.body.inRut + "&holding=2&identificacion=1");
+        process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
+        Request.get({
             "headers": { "content-type": "application/json" },
-            "url": "http://localhost:3000/mock/searchQuotes",
-            "body": JSON.stringify({
-                "In_Rut": req.body.documento,
-                "In_TipoIdentificacion": 2,
-                "In_Holding": "1",
-                "In_Pasaporte": "",
-                "In_Ppn": "5305668"
-            })
+            "url": process.env.PATH_RESERVAS + req.body.inRut + "&holding=2&identificacion=1",
         }, (error: Error, response: Response, body: string) => {
             if (error) {
                 return console.dir(error);
             }
-            res.json( JSON.parse(body));
-        });*/
-
-        if (req.body.inRut == '432296') {
-            var data = [{
-                            "cc": "5305668",
-                            "consultainstitucional": "101002",
-                            "consultaprivada": "101051",
-                            "consultasincosto": "101044",
-                            "correlativo": "1",
-                            "fechaAtencion": "0406201",
-                            "horaAtencion": "14:00",
-                            "idagenda": "1622216",
-                            "idreserva": "27251534",
-                            "idservicio": "2",
-                            "idsucursal": "1",
-                            "idtipoatencion": "C",
-                            "isapre": "1",
-                            "mp": "0",
-                            "nombremedico": "GOMEZ NUÑEZ MARCELA ANDREA",
-                            "observaciones": "Internet!! - Rut Solicitante: 22754134-2",
-                            "ppnpaciente": "5305668",
-                            "rutmedico": "14113120",
-                            "rutpaciente": "13.871.792-5",
-                            "servicio": "MEDICINA INTERNA",
-                            "sobrecupo": "N",
-                            "sucursal": "Vitacura",
-                            "tipoatencion": "CONSULTA",
-                            "validodesde": "0102201",
-                            "valorparticular": "60000",
-                            "srvMessage": 0
-                        },
-                        {
-                            "cc": "7714",
-                            "consultainstitucional": "101002",
-                            "consultaprivada": "101051",
-                            "consultasincosto": "101044",
-                            "correlativo": "1",
-                            "fechaAtencion": "05062019",
-                            "horaAtencion": "12:00",
-                            "idagenda": "1411",
-                            "idreserva": "27251540",
-                            "idservicio": "4",
-                            "idsucursal": "1",
-                            "idtipoatencion": "C",
-                            "isapre": "1",
-                            "mp": "0",
-                            "nombremedico": "BLANCO MORENO GRACIELA",
-                            "observaciones": "Internet!! - Rut Solicitante: 16010816-9",
-                            "ppnpaciente": "5305668",
-                            "rutmedico": "8934665",
-                            "rutpaciente": "13.871.792-5",
-                            "servicio": "OFTALMOLOGIA",
-                            "sobrecupo": "N",
-                            "sucursal": "Vitacura",
-                            "tipoatencion": "CONSULTA",
-                            "validodesde": "01022017",
-                            "valorparticular": "60000"
-
-                        },
-                        {
-                            "cc": "7718",
-                            "consultainstitucional": "101002",
-                            "consultaprivada": "101051",
-                            "consultasincosto": "101044",
-                            "correlativo": "1",
-                            "fechaAtencion": "0506201",
-                            "horaAtencion": "17:00",
-                            "idagenda": "1968129",
-                            "idreserva": "27251535",
-                            "idservicio": "2",
-                            "idsucursal": "1",
-                            "idtipoatencion": "C",
-                            "isapre": "1",
-                            "mp": "0",
-                            "nombremedico": "VALLEJO VERGARA PATRICIO EUGENIO",
-                            "observaciones": "Internet!! - Rut Solicitante: 16010816-9",
-                            "ppnpaciente": "5305668",
-                            "rutmedico": "14166704",
-                            "rutpaciente": "13.871.792-5",
-                            "servicio": "MEDICINA INTERNA",
-                            "sobrecupo": "N",
-                            "sucursal": "Vitacura",
-                            "tipoatencion": "CONSULTA",
-                            "validodesde": "01062017",
-                            "valorparticular": "0"
-
-                        }];
-            res.send({ data});
-        } else {
-            var rep = [{"srvMessage": 2}];
-            return ({ data: rep })
-        }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
         return res.send('Error en la petición');
+    }
+}
+export async function typeArancel(req: any, res: any) {
+    try {
+        console.log('Tipo Arancel: ');
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_ARANCEL,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) {
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function codeConvenio(req: any, res: any) {
+    try {
+        console.log('Codigo Convenio: ');
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_TYPE_CONV,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) {
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function typeProduct(req: any, res: any) {
+    try {
+        console.log('Tipo de producto: ');
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_TYPE_PROD,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) {
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function convenio(req: any, res: any) {
+    try {
+        console.log('Tipo de producto: ');
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_CONVENIO,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) {
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function searchXML(req: any, res: any) {
+    try {
+        console.log('En el API esperando XML ');
+        var parseString = require('xml2js').parseString;
+        //console.log('prueb::' + req.query.idCliente);
+        //console.log(req.body);
+        //console.log(req.body.xmlClienteNatural);
+        var xml = req.body.xmlClienteNatural;
+        xml = xml.replace(/nat:/g, "");
+        const rawResponse = JSON.parse(xml2json(xml, { compact: true, spaces: 4 }));
+        const response = rawResponse["cliente"];
+        console.log(response['numeroIdentificacion']['_cdata']);
+        console.log(response['digitoIdentificacion']['_cdata']);
+        console.log(response['idCliente']['_cdata']);
+        infoClient = {
+            "numeroIdentificacion": response['numeroIdentificacion']['_cdata'],
+            "digitoIdentificacion": response['digitoIdentificacion']['_cdata'],
+            "idCliente": response['idCliente']['_cdata']
+        };
+        console.log(infoClient);
+
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('No se pudo obtener información del paciente');
+    }
+}
+
+export async function searchVar(req: any, res: any) {
+    try {
+        console.log('En el API el valor ' + infoClient);
+        var client = infoClient;
+        infoClient = {};
+        return client;
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('No se pudo obtener información del paciente');
     }
 }
