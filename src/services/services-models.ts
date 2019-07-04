@@ -1,7 +1,5 @@
 import { xml2json } from 'xml-js'
 var Request = require('request');
-var WebSocketClient = require('websocket').client;
-var client = new WebSocketClient();
 
 let infoClient = {};
 
