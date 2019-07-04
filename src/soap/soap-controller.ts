@@ -85,3 +85,50 @@ exports.searchQuotes = async function (req: any, res: any): Promise<any> {
         })
         .catch((e: Error) => { console.log(e); res.status(403).send("Usuario y/o contraseña incorrectos") })
 };
+
+exports.searchIndicators = async function (req: any, res: any): Promise<any> {
+    const url = <string>process.env.PATH_SOAP_INDICADORES;
+    console.log('soap: '+process.env.PATH_SOAP_INDICADORES);
+    var args = {
+        'idcliente': '5535214',
+        'outSrvMessage': '',
+        'inRut': '',
+        'inCcosto': '',
+        'inAmbito': '01'
+    };
+    console.log('Argumentos searchIndicators:' + JSON.stringify(args));
+    req.socket.setKeepAlive()
+    return soap.createClientAsync(url, {})
+        .then((client: any) => { return client.atributoClienteAsync(args) })
+        .then((result: any[]) => {
+            try {
+                console.log('prueb::'+result[1]);
+                const rawResponse = JSON.parse(xml2json(result[1], { compact: true, spaces: 4 }))
+                const response = rawResponse["S:Envelope"]["S:Body"]["atributoClienteResponse"]["atributoClienteResult"]
+               
+                if (response["outCantprod"]) {
+                    var data=[
+                        {
+                            'outArrcodprod': response['outArrcodprod']['_text'],
+                            'outArrprioridad': response['outArrprioridad']['_text'],
+                            'outCantprod': response['outCantprod']['_text'],
+                            'outInstitucional': response['outInstitucional']['_text'],
+                            'outSrvMessage': response['outSrvMessage']['_text']
+                        }
+                    ];
+                    res.send({ data});
+                } else {
+                    var error=[
+                        {"srvMessage": 1}
+                    ];
+                    
+                    return res.send({ data: error })
+                }
+
+            }
+            catch (e) {
+                throw "Error on result"
+            }
+        })
+        .catch((e: Error) => { console.log(e); res.status(403).send("Usuario y/o contraseña incorrectos") })
+};
