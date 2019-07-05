@@ -1,24 +1,20 @@
-
-import * as chai from 'chai';
-import chaiHttp from 'chai-http';
 import * as routes from '../listas/listas-route';
 const nock = require('nock');
-import { Request, Response } from "express";
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+const expect = require('chai').expect;
 chai.use(chaiHttp);
-const request = chai.request;
-const expect = chai.expect;
-const url = 'http://localhost:3001';
+const url = 'http://localhost:3001/api_admision';
 
-describe('Arancel', () => {
+describe('Admisión', () => {
   describe('Route GET /searchList', () => {
-    it('Ver Arancel', (done) => {
+    it('Ver Admisión', (done) => {
       const scope = nock(url)
         .get('/searchList')
         .reply(200, {
           results: [{ codigo: 23 }],
         });
-        console.log('aqui');
-        done();
+      done();
     });
+  });
 });
-})
