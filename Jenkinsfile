@@ -29,29 +29,14 @@ pipeline{
             steps{
                  gitlabCommitStatus(name: 'test') {
                     echo 'running tests...'
-                    //sh 'npm run test'
+                    sh 'npm run coverage'
                  }
-            }
-            post {
-                always {
-                     echo 'ejecutando fichero de pruebas unitarias'
-                    //junit "**/junit-report.xml"
-                }
-            }
-        }
-        stage ('code quality'){
-            steps{
-                 gitlabCommitStatus(name: 'code quality') {
-                      echo 'lint code...'
-                      //sh '$(npm bin)/ng lint'
-                 }
-               
             }
         }
         stage ('build') {
             steps{
                  gitlabCommitStatus(name: 'build') {
-                    //sh 'npm run-script prod'
+                    sh 'npm run build-ts'
                  }
                 
             }
