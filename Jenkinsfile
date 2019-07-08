@@ -13,7 +13,7 @@ pipeline{
         stage ('checkout'){
             steps{
                 gitlabCommitStatus(name: 'checkout') {
-                    echo 'Pulling...' + env.BRANCH_NAME
+                    echo 'Pulling....' + env.BRANCH_NAME
                     checkout scm
                 }
             }
@@ -29,29 +29,14 @@ pipeline{
             steps{
                  gitlabCommitStatus(name: 'test') {
                     echo 'running tests...'
-                    sh 'npm run test'
+                    sh 'npm run coverage'
                  }
-            }
-            post {
-                always {
-                     echo 'ejecutando fichero de pruebas unitarias'
-                    //junit "**/junit-report.xml"
-                }
-            }
-        }
-        stage ('code quality'){
-            steps{
-                 gitlabCommitStatus(name: 'code quality') {
-                      echo 'lint code...'
-                      //sh '$(npm bin)/ng lint'
-                 }
-               
             }
         }
         stage ('build') {
             steps{
                  gitlabCommitStatus(name: 'build') {
-                    //sh 'npm run-script prod'
+                    sh 'npm run build-ts'
                  }
                 
             }
@@ -74,10 +59,10 @@ pipeline{
             }
             steps{
                  gitlabCommitStatus(name: 'Docker and Nexus') {
-                        echo "Deploying on develop environment...."
-                        sh 'docker image build -t api-admision .'
-                        sh "docker tag api-admision $NEXUS_REPOSITORY_URL_DEV/api-admision"
-                        sh "docker push $NEXUS_REPOSITORY_URL_DEV/api-admision"
+                        echo "Deploying on develop environment..."
+                        sh 'docker image build -t api-aranceles .'
+                        sh "docker tag api-aranceles $NEXUS_REPOSITORY_URL_DEV/api-aranceles"
+                        sh "docker push $NEXUS_REPOSITORY_URL_DEV/api-aranceles"
                  }
                     
             }
@@ -96,7 +81,8 @@ pipeline{
     }
     post {
         always { 
-            cleanWs()
+            echo 'Limpiando espacio de trabajo....'
+            //cleanWs()
         }
         success {
             echo 'Finalizado con exito'
