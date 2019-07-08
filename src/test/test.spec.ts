@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 
 const expect = chai.expect;
 const assert = chai.assert;
-const url = 'http://localhost:3000/';
+const url = 'http://localhost:3001/';
 
 describe('Array', function() {
   describe('#indexOf()', function() {

@@ -18,5 +18,4 @@ api.post('/searchXML', servicesController.searchXML);
 api.get('/searchVar', servicesController.searchVar);
 api.post('/updateClient', servicesController.updateClient);//actualizacion de datos de contacto
 api.post('/updatePrevision', servicesController.updatePrevision);//actualizacion de datos de prevision
-
 module.exports = api;
