@@ -29,7 +29,7 @@ pipeline{
             steps{
                  gitlabCommitStatus(name: 'test') {
                     echo 'running tests...'
-                    //sh 'npm run test'
+                    sh 'npm run test'
                  }
             }
             post {
