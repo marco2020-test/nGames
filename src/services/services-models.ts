@@ -2,6 +2,7 @@ import { xml2json } from 'xml-js'
 var Request = require('request');
 
 let infoClient = {};
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
 
 export async function searchClient(req: any, res: any) {
     try {
@@ -171,7 +172,6 @@ export async function searchVar(req: any, res: any) {
 export async function updateClient(req: any, res: any) {
     try {
         console.log('updateClient: ' + JSON.stringify(req.body));
-        process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
         Request.post({
             "headers": { "content-type": "application/json" },
             "url": process.env.PATH_UPDATECLIENT,
@@ -217,7 +217,6 @@ export async function updateClient(req: any, res: any) {
 export async function updatePrevision(req: any, res: any) {
     try {
         console.log('updateClient: ' + JSON.stringify(req.body));
-        process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
         Request.post({
             "headers": { "content-type": "application/json" },
             "url": process.env.PATH_UPDATEPRE,
@@ -244,6 +243,160 @@ export async function updatePrevision(req: any, res: any) {
             }
             console.log(body);
             return res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function getToken(req: any, res: any) {
+    try {
+        console.log('getToken: ' + JSON.stringify(req.body));
+        process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
+        Request.post({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_TOKEN,
+            "body": JSON.stringify({
+                'client_id': 'V77RbAM703ZYhXs1sWKzcnRh6B9FXKmM',
+                'client_secret': 'O2R65nx_-V_8sO9aUAIhJIsiy8maR2HyX0UxgcOBhG8LKdLRCEyaUhAnj6ZlWxsj',
+                'audience': 'https://m.alemana.cl/srv',
+                'grant_type': 'client_credentials'
+            })
+        }, (error: Error, response: Response, body: string) => {
+            if (error) {
+                return console.dir(error);
+            }
+            console.log(body);
+            return res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function getPais(req: any, res: any) {
+    try {
+        console.log('Paises: ');
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_PAIS,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) { 
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function getComuna(req: any, res: any) {
+    try {
+        console.log('Comunas: ');
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_COMUNA,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) { 
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function getFinan(req: any, res: any) {
+    try {
+        console.log('Financiadoras: ');
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_FINAN,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) { 
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function getEmp(req: any, res: any) {
+    try {
+        console.log('Empresas: ');
+        let atri='id=' + req.body.id + '&ded=' + req.body.ded;
+        console.log('Atri: '+atri);
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_EMP + atri,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) { 
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function getBono(req: any, res: any) {
+    try {
+        console.log('Empresas: ');
+        let atri='Usuario=' + req.body.usuario + '&Clave=' + req.body.clave + '&RutConvenio=' + req.body.rut
+        + '&CodFinanciador=' + req.body.codigo + '&FolioBono=' + req.body.bono;
+        console.log('Atri: '+atri);
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_BONO + atri,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) { 
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function getBonoC(req: any, res: any) {
+    try {
+        console.log('Empresas: ');
+        let atri='idIsapre=' + req.body.idIsapre + '&idBono=' + req.body.idBono;
+        console.log('Atri: '+atri);
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_BONO_C + atri,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) { 
+                return console.dir(error);
+            }
+            console.log(body);
+            res.json(JSON.parse(body));
         });
     }
     catch (err) {

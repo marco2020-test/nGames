@@ -8,27 +8,27 @@ const url = 'http://localhost:3001/api_admision';
 
 
 describe('Admisión', () => {
-    describe('Route POST /searchClient', () => {
-      it('Ver Admisión', (done) => {
-        const scope = nock(url)
-          .post('/searchClient')
-          .reply(404, {
-            results: [{ statusCode: 404 }],  
-          });
-        done();
-      });
+  describe('Route POST /searchClient', () => {
+    it('Ver Admisión', (done) => {
+      const scope = nock(url)
+        .post('/searchClient')
+        .reply(404, {
+          results: [{ statusCode: 404 }],
+        });
+      done();
     });
   });
-  
+});
+
 describe('Admisión', () => {
-    describe('Route POST /searchQuotes', () => {
-      it('Ver Admisión', (done) => {
-        const scope = nock(url)
-          .post('/searchQuotes')
-          .reply(200, {
-            results: [{ codigo: 23 }],
-          });
-        done();
-      });
+  describe('Route POST /searchQuotes', () => {
+    it('Ver Admisión', (done) => {
+      const scope = nock(url)
+        .post('/searchQuotes')
+        .reply(200, {
+          results: [{ codigo: 23 }],
+        });
+      done();
     });
   });
+});
