@@ -1,4 +1,4 @@
-import * as routes from '../services/services-routes';
+import * as routes from '../client/client-routes';
 const nock = require('nock');
 let chai = require('chai');
 let chaiHttp = require('chai-http');

@@ -1,8 +1,46 @@
-'use strict'
+import * as models from './utils-models';
+import * as soap from 'soap';
+import { xml2json } from 'xml-js';
 
-import * as soap from 'soap'
+exports.searchXML = async (req: any, res: any) => {
+    
+    try {
+        const result = await models.searchXML(req, res);
+        console.log(' en result'+ result);
+        return (result);
 
-import { xml2json } from 'xml-js'
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return ('Error en la petición');
+    }
+
+};
+
+exports.searchVar = async (req: any, res: any) => {
+    
+    try {
+        const result = await models.searchVar(req, res);
+        res.send(result);
+
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        res.send('Error en la petición');
+    }
+
+};
+
+exports.getBonoC = async (req: any, res: any) => {
+    
+    try {
+        const result = await models.getBonoC(req, res);
+        return(result);
+
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        res.send('Error en la petición');
+    }
+
+};
 
 exports.searchQuotes = async function (req: any, res: any): Promise<any> {
     const url = <string>process.env.PATH_SOAP_RESERVAS;
@@ -14,7 +52,7 @@ exports.searchQuotes = async function (req: any, res: any): Promise<any> {
         'inPasaporte': req.body.inPasaporte,
         'inPpn': req.body.inPpn
     };
-    console.log('Argumentos:' + JSON.stringify(args));
+    console.log('Argumentos nuevo:' + JSON.stringify(args));
     req.socket.setKeepAlive()
     return soap.createClientAsync(url, {})
         .then((client: any) => { return client.prcReservasXPacienteAsync(args) })
