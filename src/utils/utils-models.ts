@@ -70,10 +70,10 @@ export async function getBonoC(req: any, res: any) {
 
 export async function prevision(req: string) {
     try {
-        console.log('Prevision: ');
+        console.log('Prevision:');
         Request.get({
             "headers": { "content-type": "application/json" },
-            "url": process.env.MOCK_PREVISION,
+            "url": "http://127.0.0.1:3000/mock/prevision",
         }, (error: Error, response: Response, body: string) => {
             if (error) {
                 return console.dir(error);
@@ -88,6 +88,7 @@ export async function prevision(req: string) {
                     console.log('siii: ' + codSuper);
                 }
             }
+            console.log('siiiE: ' + codSuper);
             return codSuper;
         });
     }

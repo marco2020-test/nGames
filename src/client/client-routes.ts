@@ -2,9 +2,9 @@
 
 import * as express from 'express'
 
-var servicesController = require('./client-controller');
+let servicesController = require('./client-controller');
 
-var api = express.Router();
+let api = express.Router();
 api.post('/searchClient1', servicesController.searchClient1); // clientes dumming
 api.post('/searchClient', servicesController.searchClient); 
 api.post('/searchQuotes', servicesController.searchQuotes); // Reservas dumming

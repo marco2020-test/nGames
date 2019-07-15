@@ -15,10 +15,10 @@ describe("Check Sum Function: ", function() {
   });
 });
 describe('Admisión', () => {
-  describe('Route POST /searchClient', () => {
+  describe('Route POST /searchVar', () => {
     it('Ver Admisión', (done) => {
       const scope = nock(url)
-        .post('/searchClient')
+        .get('/searchVar')
         .reply(404, {
           results: [{ statusCode: 404 }],
         });
