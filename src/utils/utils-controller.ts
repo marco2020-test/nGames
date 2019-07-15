@@ -7,11 +7,15 @@ exports.searchXML = async (req: any, res: any) => {
     try {
         const result = await models.searchXML(req, res);
         console.log(' en result'+ result);
-        return (result);
+        return res.send("<html lang='en'><head><meta charset='utf-8'><script>self.close();</script></head><body></body></html>");
+
+       // return (result);
 
     } catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return ('Error en la petición');
+        return res.send("<html lang='en'><head><meta charset='utf-8'><script>self.close();</script></head><body></body></html>");
+
+        //return ('Error en la petición');
     }
 
 };
