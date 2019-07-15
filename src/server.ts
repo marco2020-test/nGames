@@ -12,7 +12,7 @@ const server = express();
 // Routes
 const listas_routes = require('./lists/lists-route');
 const client_routes = require('./client/client-routes');
-const utils_routes = require('./utils/utils.route');
+const utils_routes = require('./utils/utils-route');
 
 var listOrigins = process.env.CORS_ALLOW_ORIGIN;
 var corsOptions = {
