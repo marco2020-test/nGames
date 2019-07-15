@@ -13,10 +13,6 @@ describe("Check Sum Function: ", function() {
     let result   = models['codSuper'];
     assert(typeof(result), "string");
   });
-  it("Check the returned value using: assert(typeof(value, 'value')): ", function() {
-    let result   = models['codTok'];
-    assert(typeof(result), "string");
-  });
 });
 describe('Admisión', () => {
   describe('Route POST /searchClient', () => {
