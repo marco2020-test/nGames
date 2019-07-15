@@ -7,7 +7,7 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
 
 export async function searchXML(req: any, res: any) {
     try {
-        console.log('En el API esperando XML nuevo ');
+        console.log('En el API esperando XML nuevo :');
         let parseString = require('xml2js').parseString;
         //var ppn = req.query.idCliente;
         //console.log('el idCliente ' + ppn);
@@ -24,11 +24,11 @@ export async function searchXML(req: any, res: any) {
             };
             console.log(infoClient);
         }
-        return res.send("<html lang='en'><head><meta charset='utf-8'><script>self.close();</script></head><body></body></html>");
+        return ("<html lang='en'><head><meta charset='utf-8'><script>self.close();</script></head><body></body></html>");
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send("<html lang='en'><head><meta charset='utf-8'><script>self.close();</script></head><body></body></html>");
+        return ("<html lang='en'><head><meta charset='utf-8'><script>self.close();</script></head><body></body></html>");
     }
 }
 

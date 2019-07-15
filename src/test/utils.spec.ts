@@ -24,4 +24,9 @@ describe("Check Sum Function: ", function () {
         let result = modells.prevision('110');
         assert(typeof (result), "string");
     });
+    it("Check the returned value using: assert(typeof(value, 'value')): funcion searchXML cath", function () {
+        let data={"xmlClienteNatural":"<nat:cliente xmlns:nat='http://www.alemana.cl/mantenedor/clientes/naturales'><nat:idCliente><![CDATA[6615336]]></nat:idCliente><nat:tipoIdentificacion><![CDATA[1]]></nat:tipoIdentificacion><nat:numeroIdentificacion><![CDATA[6383170]]></nat:numeroIdentificacion><nat:digitoIdentificacion><![CDATA[0]]></nat:digitoIdentificacion><nat:nombreTipoIdentificacion></nat:cliente>"};
+        let result = modells.searchXML(data);
+        assert(typeof (result), "string");
+    });
 });
