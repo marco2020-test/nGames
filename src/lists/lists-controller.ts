@@ -1,28 +1,14 @@
-var db_client = require('../pg');
-import { searchClient, searchQuotes, typeArancel, codeConvenio, typeProduct, convenio, searchXML, searchVar, updateClient, updatePrevision } from './services-models'
+import *  as models from './lists-models'
 
-exports.searchClient = async (req: any, res: any) => {
-    
+exports.searchList = async (req: any, res: any) => {
+    console.log('En el controler nuevo');
     try {
-        const result = await searchClient(req, res);
-        return(result);
+        const result = await models.recuperarListas(req, res)
+        return res.status(200).send(result);
 
     } catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return('Error en la petición');
-    }
-
-};
-
-exports.searchQuotes = async (req: any, res: any) => {
-    
-    try {
-        const result = await searchQuotes(req, res);
-        return(result);
-
-    } catch (err) {
-        console.log('Error(' + err.code + '): ' + err.message);
-        return('Error en la petición');
+        return res.status(500).send('Error en la petición');
     }
 
 };
@@ -30,7 +16,7 @@ exports.searchQuotes = async (req: any, res: any) => {
 exports.typeArancel = async (req: any, res: any) => {
     
     try {
-        const result = await typeArancel(req, res);
+        const result = await models.typeArancel(req, res);
         return(result);
 
     } catch (err) {
@@ -43,7 +29,7 @@ exports.typeArancel = async (req: any, res: any) => {
 exports.codeConvenio = async (req: any, res: any) => {
     
     try {
-        const result = await codeConvenio(req, res);
+        const result = await models.codeConvenio(req, res);
         return(result);
 
     } catch (err) {
@@ -56,7 +42,7 @@ exports.codeConvenio = async (req: any, res: any) => {
 exports.typeProduct = async (req: any, res: any) => {
     
     try {
-        const result = await typeProduct(req, res);
+        const result = await models.typeProduct(req, res);
         return(result);
 
     } catch (err) {
@@ -69,7 +55,7 @@ exports.typeProduct = async (req: any, res: any) => {
 exports.convenio = async (req: any, res: any) => {
     
     try {
-        const result = await convenio(req, res);
+        const result = await models.convenio(req, res);
         return(result);
 
     } catch (err) {
@@ -78,37 +64,10 @@ exports.convenio = async (req: any, res: any) => {
     }
 
 };
-
-exports.searchXML = async (req: any, res: any) => {
+exports.getPais = async (req: any, res: any) => {
     
     try {
-        const result = await searchXML(req, res);
-        console.log(' en result'+ result);
-        return (result);
-
-    } catch (err) {
-        console.log('Error(' + err.code + '): ' + err.message);
-        return ('Error en la petición');
-    }
-
-};
-
-exports.searchVar = async (req: any, res: any) => {
-    
-    try {
-        const result = await searchVar(req, res);
-        res.send(result);
-
-    } catch (err) {
-        console.log('Error(' + err.code + '): ' + err.message);
-        res.send('Error en la petición');
-    }
-
-};
-exports.updateClient = async (req: any, res: any) => {
-    
-    try {
-        const result = await updateClient(req, res);
+        const result = await models.getPais(req, res);
         return(result);
 
     } catch (err) {
@@ -118,10 +77,36 @@ exports.updateClient = async (req: any, res: any) => {
 
 };
 
-exports.updatePrevision = async (req: any, res: any) => {
+exports.getComuna = async (req: any, res: any) => {
     
     try {
-        const result = await updatePrevision(req, res);
+        const result = await models.getComuna(req, res);
+        return(result);
+
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        res.send('Error en la petición');
+    }
+
+};
+
+exports.getFinan = async (req: any, res: any) => {
+    
+    try {
+        const result = await models.getFinan(req, res);
+        return(result);
+
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        res.send('Error en la petición');
+    }
+
+};
+
+exports.getEmp = async (req: any, res: any) => {
+    
+    try {
+        const result = await models.getEmp(req, res);
         return(result);
 
     } catch (err) {

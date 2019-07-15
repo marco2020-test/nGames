@@ -10,8 +10,9 @@ const cors = require('cors');
 const server = express();
 
 // Routes
-const listas_routes = require('./listas/listas-route');
-const servicios_routes = require('./services/services-routes');
+const listas_routes = require('./lists/lists-route');
+const client_routes = require('./client/client-routes');
+const utils_routes = require('./utils/utils-route');
 
 var listOrigins = process.env.CORS_ALLOW_ORIGIN;
 var corsOptions = {
@@ -31,6 +32,7 @@ server.use(bodyParser.json());
 // activacion de Routers
 if(process.env.PATH_API !== undefined) {
     server.use(process.env.PATH_API, listas_routes);
-    server.use(process.env.PATH_API, servicios_routes);
+    server.use(process.env.PATH_API, client_routes);
+    server.use(process.env.PATH_API, utils_routes);
 }
 export default server;

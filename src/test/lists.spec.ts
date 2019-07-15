@@ -1,4 +1,4 @@
-import * as routes from '../listas/listas-route';
+import * as routes from '../lists/lists-route';
 const nock = require('nock');
 let chai = require('chai');
 let chaiHttp = require('chai-http');

@@ -1,4 +1,4 @@
-var pg = require('pg');
+let pg = require('pg');
 console.log('User '+process.env.BD_USER);
 const connectionData = {
     user: process.env.BD_USER,
