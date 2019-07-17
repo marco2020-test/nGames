@@ -32,7 +32,7 @@ export async function searchXML(req: any, res: any) {
     }
 }
 
-export async function searchVar(req: any, res: any) {
+export async function searchVar(req: any, res: string) {
     try {
         console.log('En el API el valor ' + infoClient);
         var client = infoClient;
@@ -41,7 +41,7 @@ export async function searchVar(req: any, res: any) {
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 
