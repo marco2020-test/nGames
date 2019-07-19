@@ -14,28 +14,4 @@ describe("Check Sum Function: ", function() {
     assert(typeof(result), "string");
   });
 });
-describe('Admisión', () => {
-  describe('Route POST /searchVar', () => {
-    it('Ver Admisión', (done) => {
-      const scope = nock(url)
-        .get('/searchVar')
-        .reply(404, {
-          results: [{ statusCode: 404 }],
-        });
-      done();
-    });
-  });
-});
 
-describe('Admisión', () => {
-  describe('Route POST /searchQuotes', () => {
-    it('Ver Admisión', (done) => {
-      const scope = nock(url)
-        .post('/searchQuotes')
-        .reply(200, {
-          results: [{ codigo: 23 }],
-        });
-      done();
-    });
-  });
-});

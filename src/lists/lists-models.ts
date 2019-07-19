@@ -1,12 +1,15 @@
 import * as pg from 'pg';
 import {comboModels} from '../schemas/combos';
+import * as dotenv from "dotenv";
+// dotenv.config();
+
 let Request = require('request');
 var db_client = require('../middlewares/pg');
 
 export async function recuperarListas(req: any, res: any) {
     try {
         console.log('En el SQL')
-
+        
         let query = 'SELECT "ID_LIST", "DESCRIPTION" FROM public."listSelections"';
 
         console.log(query);
@@ -14,11 +17,11 @@ export async function recuperarListas(req: any, res: any) {
         const resp: pg.QueryResult = await db_client.query(query)
         console.log('Respuesta:' + resp.rowCount)
 
-        return <(comboModels[])>resp.rows
+        return <(comboModels[])>resp.rows;
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.status(500).send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 
@@ -33,12 +36,12 @@ export async function typeArancel(req: any, res: any) {
                 return console.dir(error);
             }
             console.log(body);
-            res.json(JSON.parse(body));
+            return res.send(JSON.parse(body));
         });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 
@@ -53,12 +56,12 @@ export async function codeConvenio(req: any, res: any) {
                 return console.dir(error);
             }
             console.log(body);
-            res.json(JSON.parse(body));
+            return res.send(JSON.parse(body));
         });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 
@@ -73,12 +76,12 @@ export async function typeProduct(req: any, res: any) {
                 return console.dir(error);
             }
             console.log(body);
-            res.json(JSON.parse(body));
+            return res.json(JSON.parse(body));
         });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 
@@ -93,12 +96,12 @@ export async function convenio(req: any, res: any) {
                 return console.dir(error);
             }
             console.log(body);
-            res.json(JSON.parse(body));
+            return res.json(JSON.parse(body));
         });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 export async function getPais(req: any, res: any) {
@@ -112,12 +115,12 @@ export async function getPais(req: any, res: any) {
                 return console.dir(error);
             }
             console.log(body);
-            res.json(JSON.parse(body));
+            return res.json(JSON.parse(body));
         });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 
@@ -132,12 +135,12 @@ export async function getComuna(req: any, res: any) {
                 return console.dir(error);
             }
             console.log(body);
-            res.json(JSON.parse(body));
+            return res.json(JSON.parse(body));
         });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 
@@ -152,12 +155,12 @@ export async function getFinan(req: any, res: any) {
                 return console.dir(error);
             }
             console.log(body);
-            res.json(JSON.parse(body));
+            return res.json(JSON.parse(body));
         });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 
@@ -174,12 +177,12 @@ export async function getEmp(req: any, res: any) {
                 return console.dir(error);
             }
             console.log(body);
-            res.json(JSON.parse(body));
+            return res.json(JSON.parse(body));
         });
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
-        return res.send('Error en la petición');
+        return ('Error en la petición');
     }
 }
 

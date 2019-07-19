@@ -1,4 +1,6 @@
 let pg = require('pg');
+import * as dotenv from "dotenv";
+dotenv.config();
 console.log('User '+process.env.BD_USER);
 const connectionData = {
     user: process.env.BD_USER,
