@@ -17,7 +17,7 @@ describe("Check Sum Variables: ", function () {
     });
 });
 
-/*describe("Check Sum Function modells: ", function () {
+describe("Check Sum Function modells: ", function () {
     it("Check the returned value using: assert(typeof(value, 'value')): funcion searchVar", function () {
         let result = modells.searchVar();
         assert(typeof (result), "string");
@@ -43,4 +43,4 @@ describe("Check Sum Function controller: ", function () {
         let result = controller.searchXML(data);
         assert(typeof (result), "string");
     });
-});*/
+});
