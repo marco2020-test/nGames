@@ -13,4 +13,6 @@ api.post('/updatePrevision', servicesController.updatePrevision);// actualizacio
 api.post('/searchBono', servicesController.getBono);
 api.post('/getToken', servicesController.getToken);
 api.post('/searchCalugas', servicesController.getCalugas);
+api.post('/saveClienteMongo', servicesController.saveClienteMongo);
+api.get('/searchClienteMongo', servicesController.searchClienteMongo);
 module.exports = api;

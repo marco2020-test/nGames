@@ -1,7 +1,7 @@
 import * as pg from 'pg';
 import {comboModels} from '../schemas/combos';
 import * as dotenv from "dotenv";
-// dotenv.config();
+const CachingEmpresa = require('../schemas/cachingEmpresa');
 
 let Request = require('request');
 var db_client = require('../middlewares/pg');
@@ -166,17 +166,23 @@ export async function getFinan(req: any, res: any) {
 
 export async function getEmp(req: any, res: any) {
     try {
-        console.log('Empresas nuevo: ');
+        console.log('getEmp ini');
         let atri = 'id=' + req.body.id + '&ded=' + req.body.ded;
         console.log('Atri: ' + atri);
         Request.get({
             "headers": { "content-type": "application/json" },
             "url": process.env.PATH_EMP + atri,
-        }, (error: Error, response: Response, body: string) => {
+        }, async  (error: Error, response: Response, body: string) => {
             if (error) {
-                return console.dir(error);
+                console.log('Ha ocurrido un error al recuperar las empresas desde el servicio, la informacion se extrae del caching');
+                
+                const empresasMongo = await getEmpresasMongo(res, req)
+
+                return res.json(empresasMongo);
             }
-            console.log(body);
+
+            saveEmpresa(JSON.parse(body), req, res)
+            
             return res.json(JSON.parse(body));
         });
     }
@@ -186,3 +192,68 @@ export async function getEmp(req: any, res: any) {
     }
 }
 
+export function saveEmpresa(data: JSON, req: any, res: any) {
+    try {
+        console.log('ini saveEmpresaMongo');
+        const data1 = JSON.stringify(data);
+        const formato1N = JSON.parse(data1);
+        const empresa = formato1N.admacSindicadoresResponse.admacSindicadoresResult
+
+        for (const emp of empresa.voutCursors) {
+
+            const datos = new CachingEmpresa({
+                cljuIdclientejuridico: emp.cljuIdclientejuridico,
+                cljuRazonsocial: emp.cljuRazonsocial
+            });
+    
+            const result = datos.save();
+        }
+
+        console.log('end saveEmpresaMongo');
+
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+
+export async function getEmpresasMongo(res: any, req: any) {
+    console.log('models getEmpresasMongo ini');
+
+    return new Promise< {admacSindicadoresResponse : { admacSindicadoresResult : { voutCursors  : Empresa[]} }     } >((res, rej) => {
+        return CachingEmpresa.find({})
+            .then((empresas: (Empresa & {id : string} )[]) => {
+                const emp : Empresa[] = empresas.map( (e : (Empresa & {id : string} )) =>
+                                                                { return { cljuIdclientejuridico : e.cljuIdclientejuridico , cljuRazonsocial : e.cljuRazonsocial }      })
+                const result :{admacSindicadoresResponse : { admacSindicadoresResult : { voutCursors  : Empresa[]} }     } = { 
+                    "admacSindicadoresResponse": {
+                        "admacSindicadoresResult": {
+                            "voutCursors": emp
+                        }
+                      }
+                  }
+               return res(result )
+            })
+            .catch((err: any) => {
+                console.log(err);
+            });
+    });
+};
+
+export interface AdmacSindicadoresResponse {
+    admacSindicadoresResponse: {
+        admacSindicadoresResult: {
+            voutCursors: {
+                cljuIdclientejuridico: number,
+                cljuRazonsocial: string
+            }
+        }
+    }
+}
+
+interface Empresa {
+    cljuIdclientejuridico: number,
+    cljuRazonsocial: string
+}
