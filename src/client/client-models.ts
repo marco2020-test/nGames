@@ -1,3 +1,4 @@
+const CachingCliente = require('../schemas/cachingCliente');
 import { xml2json } from 'xml-js';
 let Request = require('request');
 let codSuper = '';
@@ -318,4 +319,131 @@ export async function getCalugas(req: any, res: any) {
         console.log('Error(' + err.code + '): ' + err.message);
         return res.send('Error en la petición');
     }
+}
+
+
+export function saveClienteMongo(clienteVOResponse: ClienteVOResponse, req: any, res: any) {
+    try {
+        console.log('ini saveClienteMongo');
+
+        function save() {
+            console.log('ini saveClienteMongo clienteVOResponse.CLNU_IDCLIENTENATURAL:'+clienteVOResponse.clienteVOResponse.CLNU_IDCLIENTENATURAL);
+            
+            console.log('ini saveClienteMongo clienteVOResponse.CLNU_TIPOIDENTIFICACION:'+clienteVOResponse.clienteVOResponse.CLNU_TIPOIDENTIFICACION);
+            const datos = new CachingCliente({
+                CLNU_IDCLIENTENATURAL: clienteVOResponse.clienteVOResponse.CLNU_IDCLIENTENATURAL,
+                CLNU_TIPOIDENTIFICACION:  clienteVOResponse.clienteVOResponse.CLNU_TIPOIDENTIFICACION,
+                CLVA_NUMIDENTIFICACION:  clienteVOResponse.clienteVOResponse.CLVA_NUMIDENTIFICACION,
+                CLVA_DVIDENTIFICACION:  clienteVOResponse.clienteVOResponse.CLVA_DVIDENTIFICACION,
+                CLVA_NOMBRES:  clienteVOResponse.clienteVOResponse.CLVA_NOMBRES,
+                CLVA_APEPATERNO:  clienteVOResponse.clienteVOResponse.CLVA_APEPATERNO,
+                CLVA_APEMATERNO:  clienteVOResponse.clienteVOResponse.CLVA_APEMATERNO,
+                CLDA_FECHANACIMIENTO:  clienteVOResponse.clienteVOResponse.CLDA_FECHANACIMIENTO,
+                CLVA_SEXO:  clienteVOResponse.clienteVOResponse.CLVA_SEXO,
+                CLVA_ESTADO_CIVIL:  clienteVOResponse.clienteVOResponse.CLVA_ESTADO_CIVIL,
+                CLVA_ETNIA:  clienteVOResponse.clienteVOResponse.CLVA_ETNIA,
+                CLVA_ACTIVIDAD:  clienteVOResponse.clienteVOResponse.CLVA_ACTIVIDAD,
+                CLVA_DIRECCION:  clienteVOResponse.clienteVOResponse.CLVA_DIRECCION,
+                CLVA_NOMBRE_PAIS:  clienteVOResponse.clienteVOResponse.CLVA_NOMBRE_PAIS,
+                CLVA_NOMBRE_REGION:  clienteVOResponse.clienteVOResponse.CLVA_NOMBRE_REGION,
+                CLVA_TELEFONO_FIJO:  clienteVOResponse.clienteVOResponse.CLVA_TELEFONO_FIJO,
+                CLVA_CODIGO_COMUNA:  clienteVOResponse.clienteVOResponse.CLVA_CODIGO_COMUNA,
+                CLVA_COD_PREVISION:  clienteVOResponse.clienteVOResponse.CLVA_COD_PREVISION,
+                CLVA_ID_PAIS:  clienteVOResponse.clienteVOResponse.CLVA_ID_PAIS,
+                created: ""
+            });
+            const result = datos.save();
+            console.log('end saveClienteMongo');
+            //res.send({ data: result })
+        }
+    save();
+    
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+}
+
+export async function searchClienteMongo( ppnCliente:any) {
+    console.log('models searchClienteMongo ini ppnCliente:'+ppnCliente);
+
+    return new Promise((res, rej) => {
+    CachingCliente.findOne({ CLNU_IDCLIENTENATURAL: ppnCliente })
+      .then((cliente: any) => {
+        console.log('models searchClienteMongo cliente:'+cliente);
+        res(cliente)
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+});
+}
+
+export async function searchClient3(req: any, res: any) {
+    try {
+        console.log('Cliente: ' + req.body.documento);
+         // codTok='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFqTkdSVUUyT1VWRU1UQTJSVGt3TmpBd09EWTRNelE0UVRoRU1FSkVOVGd5T1RaQ1JFRXdRZyJ9.eyJpc3MiOiJodHRwczovL2FsZW1hbmEtcG9jLmF1dGgwLmNvbS8iLCJzdWIiOiJWNzdSYkFNNzAzWlloWHMxc1dLemNuUmg2QjlGWEttTUBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9tLmFsZW1hbmEuY2wvc3J2IiwiaWF0IjoxNTYyOTQxOTQxLCJleHAiOjE1NjMwMjgzNDEsImF6cCI6IlY3N1JiQU03MDNaWWhYczFzV0t6Y25SaDZCOUZYS21NIiwic2NvcGUiOiJyZWFkOmdyb3VwcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.7QEb8jAymtRXqyO9jL90Wnqaq3K3msipZXsOqOH3G5c9SlU-BwR56KSYD3MKeiCr5oLsI0Wz8gVmrAQeg79FVlUbbp_8n5-99nos_3e4QjhG7apJRNcqywBM-jZZ4-o3wn5aAed50vn_D8R5X8SWAKXkfnrwkeg6iCenhDMZgNVkdm7TehHFJXe7Pq0nEsd64DzCP5RRDhmvSCe0GovPx9U4x7BrzxNnCuSMXtU4YVZbeKere1VQLA8b-8AakokiyXrHoAgEV5AH0GABqpM7i_lnI_OjJQrZ47m0mBismrygmYcAFG9-Ob8qjCYEF51Kjiigqo4Z8SK5ByFI4giJNQ';
+        return new Promise((res, rej) => {
+            getToken().then((data) => {
+                Request.get({
+                    "headers": {
+                        "content-type": "application/json",
+                        "Authorization": "Bearer " + codTok
+                    },
+                    "url": process.env.PATH_CLIENTE1 + req.body.documento,
+                }, (error: Error, response: Response, body: string) => {
+                    if (error) {
+                        console.log('Error en el servicio de serachClient3');
+                        
+                        return res(error);
+                    } else {
+                        console.log('Aqui' + body);
+                        if (body === 'Not Found') {
+                            console.log('Not Found');
+                            res('Not Found');
+                        } else {
+                            console.log('El token: ' + "Bearer " + codTok);
+                            res(JSON.parse(body));
+                        }
+                    }
+                });
+            });
+        });
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return res.send('Error en la petición');
+    }
+ }
+
+export interface ClienteVOResponse {
+    clienteVOResponse:{
+        CLNU_IDCLIENTENATURAL: number,
+        CLNU_TIPOIDENTIFICACION: number,
+        CLVA_NUMIDENTIFICACION:  string,
+        CLVA_DVIDENTIFICACION:  string,
+        CLVA_NOMBRES?:  string,
+        CLVA_APEPATERNO?: string,
+        CLVA_APEMATERNO?:  string,
+        CLDA_FECHANACIMIENTO?:  string,
+        CLVA_SEXO?:  string,
+        CLVA_ESTADO_CIVIL?:  string,
+        CLVA_ETNIA?:  string,
+        CLVA_ACTIVIDAD?:  string,
+        CLVA_DIRECCION?:  string,
+        CLVA_NOMBRE_PAIS?:  string,
+        CLVA_NOMBRE_REGION?:  string,
+        CLVA_TELEFONO_FIJO?:  string,
+        CLVA_CODIGO_COMUNA?:  string,
+        CLVA_COD_PREVISION?:  string,
+        CLVA_ID_PAIS?:  string,
+        created?: string
+    },
+    OUT_COD?: number,
+    OUT_MSG?: string
+}
+
+export interface ClienteVOResponseMesaje {
+    OUT_COD?: number,
+    OUT_MSG?: string
 }

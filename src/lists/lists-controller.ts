@@ -115,3 +115,16 @@ exports.getEmp = async (req: any, res: any) => {
     }
 
 };
+
+exports.getEmpresasMongo = async (req: any, res: any) => {
+
+    try {
+        const result = await models.getEmpresasMongo(req, res);
+        return (result);
+
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return ('Error en la petición');
+    }
+
+};

@@ -2,6 +2,7 @@
 
 import * as dotenv from "dotenv";
 import express from 'express'
+var mongoose = require('mongoose');
 
 dotenv.config();
 
@@ -9,10 +10,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const server = express();
 
+const conn = mongoose.connect('mongodb://localhost:27017/admision',{ useNewUrlParser: true })
+    .then(() => console.log('Conectado a MongoDB!'))
+    .catch((err:any) => console.error('Problemas!:', err));
+
 // Routes
 const listas_routes = require('./lists/lists-route');
 const client_routes = require('./client/client-routes');
 const utils_routes = require('./utils/utils-route');
+const caching_routes = require('./caching/caching-routes');
 
 var listOrigins = process.env.CORS_ALLOW_ORIGIN;
 var corsOptions = {
@@ -34,6 +40,7 @@ if(process.env.PATH_API !== undefined) {
     server.use(process.env.PATH_API, listas_routes);
     server.use(process.env.PATH_API, client_routes);
     server.use(process.env.PATH_API, utils_routes);
+    server.use(process.env.PATH_API, caching_routes);
 }
 
 const port = process.env.PORT || 3001;
