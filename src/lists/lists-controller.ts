@@ -128,3 +128,24 @@ exports.getEmpresasMongo = async (req: any, res: any) => {
     }
 
 };
+
+
+exports.getImedInfo = async (req: any, res: any) => {
+
+    try {
+        const result = models.getImedInfo(req, res);
+
+        result.then((imed: any) => {
+           
+            const data = JSON.stringify(imed);
+            const formato1N = JSON.parse(data);
+      
+            return res.json(formato1N);
+            
+        })
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return ('Error en la petición');
+    }
+
+};

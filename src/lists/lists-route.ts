@@ -15,5 +15,7 @@ api.get('/searchPais', listasController.getPais);
 api.get('/searchComuna', listasController.getComuna);
 api.get('/searchFinan', listasController.getFinan);
 api.post('/searchEmp', listasController.getEmp);
+api.get('/getImedInfo', listasController.getImedInfo);
+
 
 module.exports = api;
