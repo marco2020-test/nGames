@@ -1,7 +1,9 @@
 import * as pg from 'pg';
-import {comboModels} from '../schemas/combos';
+import { comboModels } from '../schemas/combos';
 import * as dotenv from "dotenv";
+import { log } from 'util';
 const CachingEmpresa = require('../schemas/cachingEmpresa');
+var tools = require('lodash');
 
 let Request = require('request');
 var db_client = require('../middlewares/pg');
@@ -9,7 +11,7 @@ var db_client = require('../middlewares/pg');
 export async function recuperarListas(req: any, res: any) {
     try {
         console.log('En el SQL')
-        
+
         let query = 'SELECT "ID_LIST", "DESCRIPTION" FROM public."listSelections"';
 
         console.log(query);
@@ -172,17 +174,17 @@ export async function getEmp(req: any, res: any) {
         Request.get({
             "headers": { "content-type": "application/json" },
             "url": process.env.PATH_EMP + atri,
-        }, async  (error: Error, response: Response, body: string) => {
+        }, async (error: Error, response: Response, body: string) => {
             if (error) {
                 console.log('Ha ocurrido un error al recuperar las empresas desde el servicio, la informacion se extrae del caching');
-                
+
                 const empresasMongo = await getEmpresasMongo(res, req)
 
                 return res.json(empresasMongo);
             }
 
             saveEmpresa(JSON.parse(body), req, res)
-            
+
             return res.json(JSON.parse(body));
         });
     }
@@ -205,7 +207,7 @@ export function saveEmpresa(data: JSON, req: any, res: any) {
                 cljuIdclientejuridico: emp.cljuIdclientejuridico,
                 cljuRazonsocial: emp.cljuRazonsocial
             });
-    
+
             const result = datos.save();
         }
 
@@ -222,25 +224,107 @@ export function saveEmpresa(data: JSON, req: any, res: any) {
 export async function getEmpresasMongo(res: any, req: any) {
     console.log('models getEmpresasMongo ini');
 
-    return new Promise< {admacSindicadoresResponse : { admacSindicadoresResult : { voutCursors  : Empresa[]} }     } >((res, rej) => {
+    return new Promise<{ admacSindicadoresResponse: { admacSindicadoresResult: { voutCursors: Empresa[] } } }>((res, rej) => {
         return CachingEmpresa.find({})
-            .then((empresas: (Empresa & {id : string} )[]) => {
-                const emp : Empresa[] = empresas.map( (e : (Empresa & {id : string} )) =>
-                                                                { return { cljuIdclientejuridico : e.cljuIdclientejuridico , cljuRazonsocial : e.cljuRazonsocial }      })
-                const result :{admacSindicadoresResponse : { admacSindicadoresResult : { voutCursors  : Empresa[]} }     } = { 
+            .then((empresas: (Empresa & { id: string })[]) => {
+                const emp: Empresa[] = empresas.map((e: (Empresa & { id: string })) => { return { cljuIdclientejuridico: e.cljuIdclientejuridico, cljuRazonsocial: e.cljuRazonsocial } })
+                const result: { admacSindicadoresResponse: { admacSindicadoresResult: { voutCursors: Empresa[] } } } = {
                     "admacSindicadoresResponse": {
                         "admacSindicadoresResult": {
                             "voutCursors": emp
                         }
-                      }
-                  }
-               return res(result )
+                    }
+                }
+                return res(result)
             })
             .catch((err: any) => {
                 console.log(err);
             });
     });
 };
+
+
+export async function recuperarUsuarioImed() {
+
+    console.log('Ini Models.recuperarUsuarioImed');
+
+    let estado = 'N';
+
+    let query = `Select trim(value) as usuario
+      FROM public.parameters
+      WHERE key = 'usuario_imed'
+      `;
+
+    console.log(query);
+
+    const result: pg.QueryResult = await db_client.query(query);
+
+    let usuarioType: UsuarioImedType[] = <(UsuarioImedType[])>(result.rows.map((element) => {
+        return {
+            usuario: element.usuario
+        }
+    }));
+
+    return usuarioType[0].usuario;
+}
+
+
+export async function recuperarContrasenaImed() {
+
+    console.log('Ini Models.recuperarContrasenaImed');
+
+    let query = `Select trim(value) as contrasena
+      FROM public.parameters
+      WHERE key = 'clave_imed'
+      `;
+
+    console.log(query);
+
+    const result: pg.QueryResult = await db_client.query(query);
+
+    let constrasenaType: ContrasenaImedType[] = <(ContrasenaImedType[])>(result.rows.map((element) => {
+        return {
+            contrasena: element.contrasena
+        }
+    }));
+
+    return constrasenaType[0].contrasena;
+}
+
+
+export async function getImedInfo(req: any, res: any) {
+
+    console.log('Ini Models.getImedInfo');
+
+    return new Promise((res, rej) => {
+        let usuario: string = '';
+        let contrasena: string = '';
+
+        const resultContrasena = recuperarContrasenaImed();
+        const resultUsuario = recuperarUsuarioImed();
+
+        resultContrasena.then((contrasenaString: string) => {
+
+            contrasena = contrasenaString
+
+            resultUsuario.then((usuarioString: string) => {
+
+                usuario = usuarioString
+
+
+                const result: {} = {
+                    "iMed": {
+                        "usuarioImed": usuario,
+                        "contrasenaImed": contrasena
+                    }
+                }
+                return res(result)
+            })
+        })
+    });
+}
+
+
 
 export interface AdmacSindicadoresResponse {
     admacSindicadoresResponse: {
@@ -256,4 +340,17 @@ export interface AdmacSindicadoresResponse {
 interface Empresa {
     cljuIdclientejuridico: number,
     cljuRazonsocial: string
+}
+
+interface Imed {
+    usuario: string,
+    constrasena: string
+}
+
+interface ContrasenaImedType {
+    contrasena: string,
+}
+
+interface UsuarioImedType {
+    usuario: string,
 }
