@@ -14,6 +14,8 @@ const esquemaCliente = new Schema({
   CLVA_ETNIA: {type: String},
   CLVA_ACTIVIDAD: {type: String},
   CLVA_DIRECCION: {type: String},
+  CLVA_CELULAR: {type: String},
+  CLVA_EMAIL: {type: String},
   CLVA_NOMBRE_PAIS: {type: String},
   CLVA_NOMBRE_REGION: {type: String},
   CLVA_TELEFONO_FIJO: {type: String},
