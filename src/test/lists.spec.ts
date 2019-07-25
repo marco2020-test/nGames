@@ -1,4 +1,4 @@
-import * as routes from '../lists/lists-route';
+import * as routes from '../lists/lists-routes';
 const nock = require('nock');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -7,7 +7,7 @@ const expect = require('chai').expect;
 chai.use(chaiHttp);
 const url = 'http://localhost:3001/api_admision';
 let modells = require('../lists/lists-models');
-let route=require('../lists/lists-route');
+let route=require('../lists/lists-routes');
 
 describe("Check Sum Function modells: ", function () {
   it("Check the returned value using: assert(typeof(value, 'value')): funcion recuperarListas", function () {
