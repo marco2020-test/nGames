@@ -35,19 +35,27 @@ export async function reAbrirTurnoCaja(req: any, res: any) {
 
 export async function abrirTurnoCaja(req: any, res: any) {
     try {
-        console.log('Ini abrir turno Caja');
-        let atri = 'userCod=' + req.body.userCod + '&ipTerm=' + req.body.ipTerm + '&cantidadClp=' + req.body.cantidadClp
-            + '&tasaClp=' + req.body.tasaClp + '&cantidadUsd=' + req.body.cantidadUsd + '&cantidadUsd=' + req.body.cantidadUsd;
-        + '&tasaUsd=' + req.body.tasaUsd + '&cantidadEur=' + req.body.cantidadEur + '&tasaEur=' + req.body.tasaEur;
+        console.log('Ini abrir turno Caja Models');
 
-        Request.get({
+        Request.post({
             "headers": { "content-type": "application/json" },
-            "url": process.env.PATH_ABRIR_TURNO_CAJA + atri,
+            "url": process.env.PATH_ABRIR_TURNO_CAJA,
+            "body": JSON.stringify({
+                "userCod": req.body.userCod,
+                "ipTerm": req.body.ipTerm,
+                "cantidadClp": req.body.cantidadClp,
+                "tasaClp": req.body.tasaClp,
+                "cantidadUsd": req.body.cantidadClp,
+                "tasaUsd": req.body.tasaUsd,
+                "cantidadEur": req.body.cantidadEur,
+                "tasaEur": req.body.tasaEur
+            })
         }, (error: Error, response: Response, body: string) => {
             if (error) {
+                console.log('error:',error);
                 return console.dir(error);
             }
-            console.log(body);
+            console.log('body:'+body);
             return res.send(JSON.parse(body));
         });
     }

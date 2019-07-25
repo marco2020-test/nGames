@@ -5,7 +5,7 @@ exports.reAbrirTurnoCaja = async (req: any, res: any) => {
 
     try {
         let result = await models.reAbrirTurnoCaja(req, res);
-        
+
         return result;
 
     } catch (err) {
@@ -18,9 +18,11 @@ exports.reAbrirTurnoCaja = async (req: any, res: any) => {
 
 exports.abrirTurnoCaja = async (req: any, res: any) => {
 
+    console.log('1Ini Controller abrirTurnoCaja');
+
     try {
         let result = await models.abrirTurnoCaja(req, res);
-        
+
         return result;
 
     } catch (err) {
@@ -34,7 +36,7 @@ exports.saveBitacoraValorizacion = async (req: any, res: any) => {
 
     try {
         let result = await models.saveBitacoraValorizacion(req, res);
-        
+
         return res.send("ok");
 
     } catch (err) {
