@@ -1,7 +1,8 @@
 import * as pg from 'pg';
-import { comboModels } from '../schemas/combos';
+import { comboModels, comboCajaModels } from '../schemas/combos';
 import * as dotenv from "dotenv";
 import { log } from 'util';
+import { resolveCname } from 'dns';
 const bitacoraValorizacion = require('../schemas/bitacoraValorizacion');
 var tools = require('lodash');
 
@@ -81,4 +82,39 @@ export function saveBitacoraValorizacion(req: any, res: any) {
         console.log('Error(' + err.code + '): ' + err.message);
         return res.send('Error en la petición');
     }
-}
+};
+
+export async function getProcedencia(req: any, res: any) {
+    try {
+        console.log('Ini getProcedencia')
+
+        let query = 'SELECT "codigo", "descripcion" FROM public."procedencia"';
+
+        console.log(query);
+
+        const resp: pg.QueryResult = await db_client.query(query)
+        let comboCajaModels: comboCajaModels[] = <(comboCajaModels[])>resp.rows;
+        res.send (comboCajaModels);    
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return ('Error en la petición');
+    }
+};
+
+export async function getTipoAtencion(req: any, res: any) {
+    try {
+        console.log('Ini getTipoAtencion')
+
+        let query = 'SELECT "codigo", "descripcion" FROM public."tipoAtencion"';
+
+        console.log(query);
+        const resp: pg.QueryResult = await db_client.query(query)
+        let comboCajaModels: comboCajaModels[] = <(comboCajaModels[])>resp.rows;
+        res.send (comboCajaModels);    
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return ('Error en la petición');
+    }
+};

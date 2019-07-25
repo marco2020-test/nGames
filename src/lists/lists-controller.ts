@@ -126,7 +126,6 @@ exports.getEmpresasMongo = async (req: any, res: any) => {
         console.log('Error(' + err.code + '): ' + err.message);
         return ('Error en la petición');
     }
-
 };
 
 
@@ -147,5 +146,4 @@ exports.getImedInfo = async (req: any, res: any) => {
         console.log('Error(' + err.code + '): ' + err.message);
         return ('Error en la petición');
     }
-
 };
