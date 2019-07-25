@@ -12,14 +12,14 @@ export async function recuperarListas(req: any, res: any) {
     try {
         console.log('En el SQL')
 
-        let query = 'SELECT "ID_LIST", "DESCRIPTION" FROM public."listSelections"';
+        let query = 'SELECT "ID_LIST", "NAME_LIST","CODE", "DESCRIPTION" FROM public."listSelections"';
 
         console.log(query);
 
         const resp: pg.QueryResult = await db_client.query(query)
-        console.log('Respuesta:' + resp.rowCount)
+        let comboModels: comboModels[] = <(comboModels[])>resp.rows;
 
-        return <(comboModels[])>resp.rows;
+        res.send (comboModels);    
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);

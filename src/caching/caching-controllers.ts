@@ -99,7 +99,7 @@ exports.cachingClient = async (req: any, res: any) => {
                         CLVA_ACTIVIDAD: clientMongo.CLVA_ACTIVIDAD,
                         CLVA_DIRECCION: clientMongo.CLVA_DIRECCION,
                         CLVA_CELULAR:  clientMongo.CLVA_CELULAR,
-                        CLVA_EMAIL:  clientMongo.clienteVOResponse.CLVA_EMAIL,
+                        CLVA_EMAIL:  clientMongo.CLVA_EMAIL,
                         CLVA_NOMBRE_PAIS: clientMongo.CLVA_NOMBRE_PAIS,
                         CLVA_NOMBRE_REGION: clientMongo.CLVA_NOMBRE_REGION,
                         CLVA_TELEFONO_FIJO: clientMongo.CLVA_TELEFONO_FIJO,

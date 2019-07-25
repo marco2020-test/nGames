@@ -1,5 +1,8 @@
 export interface comboModels {
-
-    ID_LIST: string
+    ID_LIST: number,
+    NAME_LIST: string,
+    CODE: string,
     DESCRIPTION: string
   }
+
+

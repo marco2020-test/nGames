@@ -1,10 +1,10 @@
 import *  as models from './lists-models'
 
 exports.searchList = async (req: any, res: any) => {
-    console.log('En el controler nuevo');
+    console.log('Ini controller searchList');
     try {
         let result = await models.recuperarListas(req, res);
-        return result;
+        return (result);
 
     } catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
@@ -126,7 +126,6 @@ exports.getEmpresasMongo = async (req: any, res: any) => {
         console.log('Error(' + err.code + '): ' + err.message);
         return ('Error en la petición');
     }
-
 };
 
 
@@ -147,5 +146,4 @@ exports.getImedInfo = async (req: any, res: any) => {
         console.log('Error(' + err.code + '): ' + err.message);
         return ('Error en la petición');
     }
-
 };

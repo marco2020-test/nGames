@@ -1,4 +1,4 @@
-import * as routes from '../utils/utils-route';
+import * as routes from '../utils/utils-routes';
 const nock = require('nock');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const url = 'http://localhost:3001/api_admision';
 let modells = require('../utils/utils-models');
 let controller= require ('../utils/utils-controller');
-let route = require('../utils/utils-route');
+let route = require('../utils/utils-routes');
 
 describe("Check Sum Variables: ", function () {
     it("Check the returned value using: assert(typeof(value, 'value')): Variable codSuper ", function () {
