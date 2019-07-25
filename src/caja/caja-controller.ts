@@ -34,11 +34,10 @@ exports.saveBitacoraValorizacion = async (req: any, res: any) => {
     try {
         let result = await models.saveBitacoraValorizacion(req, res);
         
-        return result;
+        return res.send("ok");
 
     } catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
         return ('Error en la petición');
     }
-
 };
