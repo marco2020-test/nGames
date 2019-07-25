@@ -10,7 +10,5 @@ console.log('Caja En el route nuevo');
 api.get('/reAbrirTurnoCaja', cajaController.reAbrirTurnoCaja);
 api.post('/abrirTurnoCaja', cajaController.abrirTurnoCaja);
 api.post('/saveBitacoraValorizacion', cajaController.saveBitacoraValorizacion);
-api.get('/getProcedencia', cajaController.getProcedencia);
-api.get('/getTipoAtencion', cajaController.getTipoAtencion);
 
 module.exports = api;
