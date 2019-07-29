@@ -1,5 +1,5 @@
 import * as models from './client-models'
-const CachingCliente = require('../schemas/cachingCliente');
+const CachingCliente = require('../schemas/caching-cliente');
 import { ClienteVOResponse } from '../client/client-models'
 
 exports.searchClient1 = async (req: any, res: any) => {

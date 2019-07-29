@@ -3,7 +3,7 @@ import { comboModels } from '../schemas/combos';
 import * as dotenv from "dotenv";
 import { log } from 'util';
 import { resolveCname } from 'dns';
-const bitacoraValorizacion = require('../schemas/bitacoraValorizacion');
+const bitacoraValorizacion = require('../schemas/bitacora-valorizacion');
 var tools = require('lodash');
 
 

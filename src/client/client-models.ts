@@ -1,4 +1,4 @@
-const CachingCliente = require('../schemas/cachingCliente');
+const CachingCliente = require('../schemas/caching-cliente');
 import { xml2json } from 'xml-js';
 let Request = require('request');
 let codSuper = '';
