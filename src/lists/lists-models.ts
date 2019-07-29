@@ -2,7 +2,7 @@ import * as pg from 'pg';
 import { comboModels } from '../schemas/combos';
 import * as dotenv from "dotenv";
 import { log } from 'util';
-const CachingEmpresa = require('../schemas/cachingEmpresa');
+const CachingEmpresa = require('../schemas/caching-empresa');
 var tools = require('lodash');
 
 let Request = require('request');
