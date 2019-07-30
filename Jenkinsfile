@@ -13,7 +13,7 @@ pipeline{
         stage ('checkout'){
             steps{
                 gitlabCommitStatus(name: 'checkout') {
-                    echo 'Pulling....' + env.BRANCH_NAME
+                    echo 'Pulling...' + env.BRANCH_NAME
                     checkout scm
                 }
             }
@@ -60,9 +60,9 @@ pipeline{
             steps{
                  gitlabCommitStatus(name: 'Docker and Nexus') {
                         echo "Deploying on develop environment..."
-                        sh 'docker image build -t api-aranceles .'
-                        sh "docker tag api-aranceles $NEXUS_REPOSITORY_URL_DEV/api-aranceles"
-                        sh "docker push $NEXUS_REPOSITORY_URL_DEV/api-aranceles"
+                        sh 'docker image build -t api-admision .'
+                        sh "docker tag api-admision $NEXUS_REPOSITORY_URL_DEV/api-admision"
+                        sh "docker push $NEXUS_REPOSITORY_URL_DEV/api-admision"
                  }
                     
             }
