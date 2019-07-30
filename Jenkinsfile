@@ -13,7 +13,7 @@ pipeline{
         stage ('checkout'){
             steps{
                 gitlabCommitStatus(name: 'checkout') {
-                    echo 'Pulling....' + env.BRANCH_NAME
+                    echo 'Pulling...' + env.BRANCH_NAME
                     checkout scm
                 }
             }
