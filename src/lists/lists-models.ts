@@ -19,7 +19,7 @@ export async function recuperarListas(req: any, res: any) {
         const resp: pg.QueryResult = await db_client.query(query)
         let comboModels: comboModels[] = <(comboModels[])>resp.rows;
 
-        res.send (comboModels);    
+        res.send(comboModels);
     }
     catch (err) {
         console.log('Error(' + err.code + '): ' + err.message);
@@ -181,11 +181,12 @@ export async function getEmp(req: any, res: any) {
                 const empresasMongo = await getEmpresasMongo(res, req)
 
                 return res.json(empresasMongo);
+            } else {
+
+                saveEmpresa(JSON.parse(body), req, res)
+
+                return res.json(JSON.parse(body));
             }
-
-            saveEmpresa(JSON.parse(body), req, res)
-
-            return res.json(JSON.parse(body));
         });
     }
     catch (err) {
@@ -322,6 +323,26 @@ export async function getImedInfo(req: any, res: any) {
             })
         })
     });
+}
+
+export async function tipoMoneda(req: any, res: any) {
+    try {
+        console.log('tipoMoneda nuevo: ');
+        Request.get({
+            "headers": { "content-type": "application/json" },
+            "url": process.env.PATH_MONEDA,
+        }, (error: Error, response: Response, body: string) => {
+            if (error) {
+                return console.dir(error);
+            }
+            console.log(body);
+            return res.send(JSON.parse(body));
+        });
+    }
+    catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return ('Error en la petición');
+    }
 }
 
 

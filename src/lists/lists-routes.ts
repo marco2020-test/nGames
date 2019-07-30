@@ -16,6 +16,7 @@ api.get('/searchComuna', listasController.getComuna);
 api.get('/searchFinan', listasController.getFinan);
 api.post('/searchEmp', listasController.getEmp);
 api.get('/getImedInfo', listasController.getImedInfo);
+api.get('/tipoMoneda', listasController.tipoMoneda); //Data dumming
 
 
 module.exports = api;

@@ -5,16 +5,15 @@ import { log } from 'util';
 import { resolveCname } from 'dns';
 const bitacoraValorizacion = require('../schemas/bitacora-valorizacion');
 var tools = require('lodash');
-
-
 let Request = require('request');
 var db_client = require('../middlewares/pg');
-
+var ip = require('ip');
+let ipEquipo=ip.address();
 export async function reAbrirTurnoCaja(req: any, res: any) {
     try {
         console.log('Ini ReAbrir turno Caja');
-        let atri = 'userCod=' + req.body.userCod + '&ipTerm=' + req.body.ipTerm;
-
+        let atri = 'userCod=' + req.query.userCod + '&ipTerm=' + ipEquipo;
+        console.log('Ini ReAbrir turno Caja: ' + process.env.PATH_REABRIR_TURNO_CAJA + atri);
         Request.get({
             "headers": { "content-type": "application/json" },
             "url": process.env.PATH_REABRIR_TURNO_CAJA + atri,
@@ -36,13 +35,13 @@ export async function reAbrirTurnoCaja(req: any, res: any) {
 export async function abrirTurnoCaja(req: any, res: any) {
     try {
         console.log('Ini abrir turno Caja Models');
-
+        console.log('La IP: ' + ipEquipo);
         Request.post({
             "headers": { "content-type": "application/json" },
             "url": process.env.PATH_ABRIR_TURNO_CAJA,
             "body": JSON.stringify({
                 "userCod": req.body.userCod,
-                "ipTerm": req.body.ipTerm,
+                "ipTerm": ipEquipo,
                 "cantidadClp": req.body.cantidadClp,
                 "tasaClp": req.body.tasaClp,
                 "cantidadUsd": req.body.cantidadClp,
