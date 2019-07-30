@@ -147,3 +147,17 @@ exports.getImedInfo = async (req: any, res: any) => {
         return ('Error en la petición');
     }
 };
+
+exports.tipoMoneda = async (req: any, res: any) => {
+
+    try {
+        const result = await models.tipoMoneda(req, res);
+        return (result);
+
+    } catch (err) {
+        console.log('Error(' + err.code + '): ' + err.message);
+        return ('Error en la petición');
+    }
+
+};
+
