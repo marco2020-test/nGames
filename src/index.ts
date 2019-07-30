@@ -12,7 +12,7 @@ const server = express();
 
 const urlConnectionMongo:string = process.env.URL_DB_MONGO || 'mongodb://localhost:27017/admision';
 
-console.log("urlConnectionMongo: " + urlConnectionMongo);
+console.log("urlConnectionMongo : " + urlConnectionMongo);
 
 const conn = mongoose.connect(urlConnectionMongo,{ useNewUrlParser: true })
     .then(() => console.log('Conectado a MongoDB!'))
