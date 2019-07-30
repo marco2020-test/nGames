@@ -20,7 +20,7 @@ spec:
         - name: PORT
           value: "80"
         - name: URL_DB_MONGO
-          value: "api-admision-mongo-stateful-set-0.api-admision-mongo-hs-svc:27017,api-admision-mongo-stateful-set-1.api-admision-mongo-hs-svc:27017,api-admision-mongo-stateful-set-2.api-admision-mongo-hs-svc:27017/admision?replicaSet=rs0"
+          value: "mongodb://api-admision-mongo-stateful-set-0.api-admision-mongo-hs-svc:27017,api-admision-mongo-stateful-set-1.api-admision-mongo-hs-svc:27017,api-admision-mongo-stateful-set-2.api-admision-mongo-hs-svc:27017/admision?replicaSet=rs0"
       imagePullSecrets:
       - name: regcred
 ---
