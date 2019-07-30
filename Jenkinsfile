@@ -81,7 +81,7 @@ pipeline{
     }
     post {
         always { 
-            echo 'Limpiando espacio de trabajo....'
+            echo 'Limpiando espacio de trabajo.'
             cleanWs()
         }
         success {
