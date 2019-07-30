@@ -10,7 +10,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const server = express();
 
-const conn = mongoose.connect('mongodb://localhost:27017/admision',{ useNewUrlParser: true })
+const urlMongo:string = process.env.URL_MONGO || 'localhost:27017';
+
+const conn = mongoose.connect('mongodb://'+ urlMongo+ '/admision',{ useNewUrlParser: true })
     .then(() => console.log('Conectado a MongoDB!'))
     .catch((err:any) => console.error('Problemas!:', err));
 
