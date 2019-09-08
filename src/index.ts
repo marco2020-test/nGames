@@ -12,13 +12,16 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const server = express()
 
-// const urlConnectionMongo:string = process.env.URL_DB_MONGO || 'mongodb://localhost:27017/auth1';
+//const urlConnectionMongo:string = process.env.URL_DB_MONGO || 'mongodb://localhost:27017/auth1';
+const urlConnectionMongo:string = process.env.URL_DB_MONGO || 'mongodb+srv://mm:hola@cluster0-bhqdd.mongodb.net/test?retryWrites=true&w=majority';
+                                                               
 
-// console.log("urlConnectionMongo: " + urlConnectionMongo);
 
-// const conn = mongoose.connect(urlConnectionMongo,{ useNewUrlParser: true })
-//     .then(() => console.log('Conectado a MongoDB!'))
-//     .catch((err:any) => console.error('Problemas!:', err));
+console.log("urlConnectionMongo: " + urlConnectionMongo);
+
+const conn = mongoose.connect(urlConnectionMongo,{ useNewUrlParser: true })
+    .then(() => console.log('Conectado a MongoDB!'))
+    .catch((err:any) => console.error('Problemas!:', err));
 
 // Routes
  const juegos_routes = require('./juegos/juego-routes');
