@@ -13,7 +13,7 @@ export async function authenticationLogin(req: any, res: any) {
         const { errors, isValid } = validateLoginInput(req.body);
         if(!isValid) {
             return res.status(400).json(errors);
-        }
+        };
         
         const email = req.body.email;
         const password = req.body.password;
