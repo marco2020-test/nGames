@@ -7,9 +7,35 @@ let codTok = '';
 let infoClient = {};
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
 
+export async function tresDeSeis(req: any, res: any) {
+    return res.json({'marco':123});
+    // try {
+    //     console.log('Metodo viejo4: ' + req.body.documento);
+    //     Request.post({
+    //         "headers": { "content-type": "application/json" },
+    //         "url": process.env.PATH_CLIENTE,
+    //         "body": JSON.stringify({
+    //             "documento": req.body.documento
+    //         })
+    //     }, (error: Error, response: Response, body: string) => {
+    //         if (error) {
+    //             return console.dir(error);
+    //         }
+    //         console.log(body);
+    //         res.json(JSON.parse(body));
+    //     });
+    // }
+    // catch (err) {
+    //     console.log('Error(' + err.code + '): ' + err.message);
+    //     return res.send('Error en la petición');
+    // }
+}
+
 export async function searchClient1(req: any, res: any) {
+    
+    
     try {
-        console.log('Metodo viejo2: ' + req.body.documento);
+        console.log('Metodo viejo: ' + req.body.documento);
         Request.post({
             "headers": { "content-type": "application/json" },
             "url": process.env.PATH_CLIENTE,
@@ -28,11 +54,12 @@ export async function searchClient1(req: any, res: any) {
         console.log('Error(' + err.code + '): ' + err.message);
         return res.send('Error en la petición');
     }
+
 }
 
 export async function searchQuotes(req: any, res: any) {
     try {
-        console.log('Metodo viejo3: ' + req.body.inRut);
+        console.log('Metodo viejo1: ' + req.body.inRut);
         console.log("url:" + process.env.PATH_RESERVAS + req.body.inRut + "&holding=2&identificacion=1");
         Request.get({
             "headers": { "content-type": "application/json" },
