@@ -27,8 +27,7 @@
     "multiparty": "^4.2.1",
     "nodemon": "^1.19.1",
     "pg": "^7.11.0",
-    "typescript": "^3.5.2",
-    "xml2js": "^0.4.19"
+    "typescript": "^3.5.2"
   },
   "devDependencies": {
     "bcryptjs": "^2.4.3",
@@ -43,9 +42,6 @@
     "nodemon": "^1.19.1",
     "should": "^13.2.3",
     "sinon": "^7.3.2",
-    "soap": "^0.27.1",
-    "source-map-support": "^0.5.12",
-    "xml-js": "^1.6.11",
-    "xml2js": "^0.4.19"
+    "source-map-support": "^0.5.12"
   }
 }

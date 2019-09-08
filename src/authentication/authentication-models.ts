@@ -1,5 +1,4 @@
 const User = require('../models/User');
-import { xml2json } from 'xml-js';
 const  jwt  =  require('jsonwebtoken');
 const  bcrypt  =  require('bcryptjs');
 const validateRegisterInput=require('../validation/register')
