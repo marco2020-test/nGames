@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const server = express();
+const server = express()
 
 //const urlConnectionMongo:string = process.env.URL_DB_MONGO || 'mongodb://localhost:27017/admision';
 const urlConnectionMongo:string = process.env.URL_DB_MONGO || 'mongodb://localhost:27017/auth1';
