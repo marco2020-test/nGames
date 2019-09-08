@@ -1,11 +1,12 @@
 'use strict'
 
-import * as dotenv from "dotenv";
+//import * as dotenv from "dotenv";
 import express from 'express'
 var mongoose = require('mongoose');
+(require('dotenv').config({ silent: process.env.NODE_ENV === 'production' }))
 
 
-dotenv.config();
+//dotenv.config();
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
